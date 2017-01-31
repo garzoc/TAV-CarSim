@@ -54,6 +54,7 @@ interface ActionsInterface {
      * Pre-Condition:
      * 1. Car is on the road and
      * 2. Car is not parked
+     * 3. Car is not at the beginning of the street
      * Post-Condition:
      * 1. The car gets moved 1 meter backwards
      * Test-Cases:
