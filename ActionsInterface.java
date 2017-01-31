@@ -15,8 +15,10 @@ interface ActionsInterface {
      * Pre-Condition:
      * 1. Car is on the road and
      * 2. Car is not parked
+     * 3. Car isn't at the end of the street
      * Post-Condition:
      * 1. Car is moved forward by 1 meters
+     * 2. Method returns position of the car and If the space on the right side is free
      * Test-Cases:
      * 1. @Test moveForward()
      * 2.
