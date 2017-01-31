@@ -41,7 +41,8 @@ interface ActionsInterface {
      * 1. The empty space added to a list
      * Test-Cases:
      * 1. @Test isEmpty()
-     * 2.
+     * 2. Test sensor outputs
+     * 3. Test the noise filtering
      */
 
     //---------------------
