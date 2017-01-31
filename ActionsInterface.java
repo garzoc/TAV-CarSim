@@ -105,6 +105,7 @@ interface ActionsInterface {
      * Description:
      * This method is used for keeping track of the cars position on the street as well as if the car is parked or not
      * Post-Condition:
+     * 1.Method shoiuld return the position of the car and whether or not it's parked
      * Test-Cases:
      * 1. @Test Whereis()
      * 2.
