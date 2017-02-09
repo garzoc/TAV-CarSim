@@ -8,10 +8,21 @@ public class Car  implements ParkingAssistant {
     private int stretch = 0;
     
 
+    
+    private int[] spaces = new int[500];
 
+    public void generateMap(int[] spaces) {
+        for (int i =0; i<500;i++) {
+            this.spaces[i] = (int) (Math.random()*200);
+          //  System.out.println(spaces[i]);
+        }
+    }
+    
+    
     public  Car(int position, boolean isParked) {
     	state.position = position;
     	state.isParked = isParked;
+    	generateMap(spaces);
     }
 
     public void Park() {
@@ -53,7 +64,7 @@ public class Car  implements ParkingAssistant {
         }
     }
 
-    public boolean isEmpty() {
+    public int isEmpty() {
         parkingSpaces[state.position] = getDistance();
         if (parkingSpaces[state.position] >= 100 && parkingSpaces[state.position] <= 200) {
             stretch += 1;
@@ -61,10 +72,10 @@ public class Car  implements ParkingAssistant {
         else {
             stretch = 0;
         }
-		return state.isParked;
+		return state.position;
     }
 
-    public ParkingAssistant.State WhereIs() {
+    public State WhereIs() {
         System.out.println(state.position + "," + state.isParked);
 		return state;
     }

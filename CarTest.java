@@ -24,7 +24,9 @@ public class CarTest {
 
     @Test
     public void isEmpty(){
-
+    	Car pa = new Car(0,false);
+    	ParkingAssistant.State test=pa.WhereIs();
+    	assertEquals(0,test.position);
     }
 
     @Test
@@ -34,7 +36,7 @@ public class CarTest {
 
     @Test
     public void Park(){
-
+    
     }
 
     @Test
@@ -46,6 +48,8 @@ public class CarTest {
     @Test
     public void WhereIs(){
     	Car pa = new Car(0,false);
+    	ParkingAssistant.State test=pa.WhereIs();
+    	assertEquals(0,test.position);
     	
     }
 

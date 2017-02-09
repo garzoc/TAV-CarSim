@@ -36,7 +36,7 @@ interface ParkingAssistant {
 
     //---------------------
 
-    boolean isEmpty();
+    int isEmpty();
 
     /**
      * Description:
