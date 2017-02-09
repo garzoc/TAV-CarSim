@@ -9,6 +9,8 @@ public class ActionsTest {
     String message = "Hello World";
     Actions messa = new Actions(message);
 
+
+
     @Test
     public void justATest(){
         message = "New Word";
