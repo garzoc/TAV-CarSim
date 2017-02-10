@@ -8,15 +8,6 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 public class CarTest {
-    String message = "Hello World";
-   // Actions messa = new Actions();
-
-   /* @Test
-    public void justATest(){
-        message = "New Word";
-        assertEquals("","");
-    }*/
-
 
     /*
      * Test to see if the car can move forward in a normal situation
@@ -62,25 +53,74 @@ public class CarTest {
     
     /*
      * Test to see how well the noise filtering works 
-     * The maximum offset is 20
+     * The maximum offset is 15
      * */
     @Test
-    public void isEmpty(){
+    public void isEmptySensor1(){
+    	/*
+    	 * Create predefined obsatcles at distance 100
+    	 * to the test how well we can filter out the noise on sensor 1
+    	 * */
+    	int []spaces=new int[10];
+    	for (int i =0; i<10;i++) 
+            spaces[i] = 100;
+        
+    	
     	Car pa = new Car(2,false);
+    	pa.generateMap(spaces);
     	double[] test=pa.isEmpty();
     	//System.out.println(test[0]);
     	//System.out.println(test[1]);
     	assertEquals(100.0,test[0],15);
-    	//assertEquals(0,test.position);
     }
+    
+    /*
+     * Test to see how well the noise filtering works 
+     * The maximum offset is 15
+     * */
+    @Test
+    public void isEmptySensor2(){
+    	/*
+    	 * Create predefined obsatcles at distance 100
+    	 * to the test how well we can filter out the noise on sensor 2  
+    	 * */
+    	int []spaces=new int[10];
+    	for (int i =0; i<10;i++) 
+            spaces[i] = 100;
+        
+    	
+    	Car pa = new Car(2,false);
+    	pa.generateMap(spaces);
+    	
+    	double[] test=pa.isEmpty();
+    	assertEquals(100.0,test[1],15);
 
+    }
+    
+    
+    /*
+     * test to see if the sensor will read a valid input while parked
+     * */
+    @Test
+    public void readSensorWhileParked(){
+    	
+    	Car pa = new Car(2,true);
+    	
+    	double[] test=pa.isEmpty();
+    	assertTrue(test[0]==0 && test[1]==0);
+    }
+    
+ 
+    
     
     /*
      * Test to see if the car can move forward in a normal situation
      * */
     @Test
     public void MoveBackward(){
+    
     	Car pa = new Car(100,false);
+    	pa.generateMap(new int[0]);
     	ParkingAssistant.State state=pa.MoveBackward();
     	assertEquals(99,state.position);
     }
@@ -92,6 +132,7 @@ public class CarTest {
     @Test
     public void MoveBackwardOutOfBounds(){
     	Car pa = new Car(0,false);
+    	pa.generateMap(new int[0]);
     	ParkingAssistant.State state=pa.MoveBackward();
     	assertEquals(0,state.position);
     }
@@ -101,29 +142,109 @@ public class CarTest {
     @Test
     public void MoveBackwardFromOutOfBounds(){
     	Car pa = new Car(500,false);
+    	pa.generateMap(new int[0]);
     	ParkingAssistant.State state=pa.MoveBackward();
     	assertEquals(500,state.position);
     }
+    
+    
+    /*
+     *Test to see what happen when the car tries to move forward while it is parked
+     * */
+    @Test
+    public void MoveBackwardWhileParked() {
+    	Car pa = new Car(50,true);
+    	ParkingAssistant.State state=pa.MoveBackward();
+    	assertEquals(50,state.position);
+    }
 
+    /*
+     * Test to see what happens if one the sensor get's disabled when the car tries to park
+     * */
+    
+    @Test
+    public void oneSensorDisabledPark(){
+    	
+    	int []spaces=new int[15];
+    	for (int i =0; i<10;i++) 
+            spaces[i] = 100;
+    	for (int i =10; i<15;i++) 
+            spaces[i] = 178;
+    	
+    	Car pa = new Car(2,false);   	
+    	pa.disableSensor(-1, 13);
+    	pa.generateMap(spaces);
+    	pa.Park();
+    	assertTrue(pa.WhereIs().isParked && pa.WhereIs().position==14);
+
+
+    }
+    
+    /*
+     * Test to see what happens when the car tries to park and all sensors are disabled
+     * */
+    @Test
+    public void allSensorsDiabledPark(){
+    	
+    	
+    	int []spaces=new int[15];
+    	for (int i =0; i<10;i++) 
+            spaces[i] = 100;
+    	for (int i =10; i<15;i++) 
+            spaces[i] = 178;
+    	Car pa = new Car(2,false);   	
+    	pa.disableSensor(14, 14);
+    	pa.generateMap(spaces);
+    	pa.Park();
+    	assertTrue(!(pa.WhereIs().isParked && pa.WhereIs().position==14));
+   
+
+    }
     
     /*
      * Test to see if the car can park
      * */
     @Test
     public void Park(){
+    	
+    	int []spaces={100,100,100,100,100,178,100,100,178,178,178,178,100,178,178,178,178,178};
+    
     	Car pa = new Car(0,false);
+    	pa.generateMap(spaces);
     	pa.Park();
-    	assertEquals(pa.WhereIs().isParked,true);
+    	assertTrue(pa.WhereIs().isParked==true && pa.WhereIs().position==17);
     }
     /*
-     * Test to see if the parking is consistent when looking for a parking space
+     * Test to see if the car parks in the first space it sees
      * */
     @Test
     public void ParkInFirstSpace(){
+    	int []spaces=new int[15];
+    	for (int i =0; i<5;i++) spaces[i] = 100;
+    	for (int i =5; i<10;i++) spaces[i] = 178;
+        
     	Car pa = new Car(0,false);
+    	pa.generateMap(spaces);
+    	
     	pa.Park();
-    	assertEquals(8,pa.WhereIs().position);
+    	assertEquals(9,pa.WhereIs().position);
     }
+    
+    
+    
+    /*
+     * Test to see what happens when the car park while parked
+     * */
+    @Test
+    public void ParkWhileParked(){
+    	
+        
+    	Car pa = new Car(58,true);
+    	assertTrue(58==pa.WhereIs().position && pa.WhereIs().isParked);
+    }
+    
+    
+    
 
     /*
      * Test to see if we can unpark
@@ -135,6 +256,22 @@ public class CarTest {
     	assertEquals(pa.WhereIs().isParked,false);
     	
     }
+    
+    
+    /*
+     * Test to see what happens when thre car unpark while not parked
+     * */
+    @Test
+    public void UnParkWhileNotParked(){
+    	Car pa = new Car(0,false);
+    	//pa.UnPark();
+    	assertEquals(pa.WhereIs().isParked,false);
+    	
+    }
+    
+   
+    
+   
 
     /*
      * test to see if we can use where is

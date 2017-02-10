@@ -7,11 +7,11 @@ interface ParkingAssistant {
 	public class State{
     	public int position;
     	public boolean isParked;
-    	public int stretch;
+    	public int streak;
     	public State(){
     		position=0;
     		isParked=false;
-    		stretch=0;
+    		streak=0;
     	}
     	
     }
@@ -20,7 +20,7 @@ interface ParkingAssistant {
 	 * Description:
 	 * This class contains the the current position of the cart
 	 * and whether it's is parked or not
-	 * as well as stretch which is a counter of how many open spaces that are adjacent to each other.
+	 * as well as streak which is a counter of how many open spaces that are adjacent to each other.
 	 * */
 	
 	
@@ -56,11 +56,14 @@ interface ParkingAssistant {
      * This method Checks is there is an empty parking space.
      * Pre-Condition:
      * 1. Car is not parked
-     * 2. Car is moving forward
+     * 2. Car is moving
      * Post-Condition:
      * 1. Returns an array of sensors
      * Test-Cases:
-     * 1. @Test isEmpty()
+     * 1. @Test isEmptySensor1()
+     * 2. @Test isEmptySensor2()
+     * 3. @Test readSensorWhileParked()
+     * 
      * @return 
      */
 
@@ -80,6 +83,7 @@ interface ParkingAssistant {
      * 1. @Test MoveBackward()
      * 2. @Test MoveBackwardOutOfBounds()
      * 3. @Test MoveBackwardFromOutOfBounds()
+     * 4. @Test MoveBackwardWhileParked()
      */
 
     //---------------------
@@ -95,8 +99,11 @@ interface ParkingAssistant {
      * Post-Condition:
      * 1. The car gets parked in a parking space
      * Test-Cases:
-     * 1. @Test Park()
-     * 2. @Test ParkInFirstSpace()
+     * 1. @Test oneSensorDisabledPark()
+     * 2. @Test allSensorsDiabledPark()
+     * 3. @Test Park()
+     * 4. @Test ParkInFirstSpace()
+     * 5. @Test ParkWhileParked
      * 
      */
 
@@ -113,6 +120,7 @@ interface ParkingAssistant {
      * 2. The car gets placed in front of the parking space that the car was parked in
      * Test-Cases:
      * 1. @Test UnPark()
+     * 2. @Test UnParkWhileNotParked
      */
 
     //---------------------
