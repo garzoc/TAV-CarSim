@@ -18,6 +18,9 @@ public class CarTest {
     }*/
 
 
+    /*
+     * Test to see if the car can move forward in a normal situation
+     * */
     @Test
     public void MoveForwardOnce() {
     	Car pa = new Car(0,false);
@@ -25,6 +28,9 @@ public class CarTest {
     	assertEquals(1,state.position);
     }
     
+    /*
+     * Test to see what happens if the cars try to go out of bounds
+     * */
     @Test
     public void MoveForwardOutOfBounds() {
     	Car pa = new Car(499,false);
@@ -32,7 +38,9 @@ public class CarTest {
     	assertEquals(499,state.position);
     }
     
-    
+    /*
+     * Test to see what happens if the cars starting position is out of bound and it tries to move
+     * */
     @Test
     public void MoveForwardFromOutOfBounds() {
     	Car pa = new Car(-1,false);
@@ -40,13 +48,19 @@ public class CarTest {
     	assertEquals(-1,state.position);
     }
     
+    
+    /*
+     *Test to see what happen when the car tries to move forward while it is parked
+     * */
     @Test
     public void MoveForwardWhileParked() {
     	Car pa = new Car(50,true);
     	ParkingAssistant.State state=pa.MoveForward();
     	assertEquals(50,state.position);
     }
-
+    
+    
+    /**/
     @Test
     public void isEmpty(){
     	Car pa = new Car(2,false);

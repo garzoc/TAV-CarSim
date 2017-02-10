@@ -7,14 +7,21 @@ interface ParkingAssistant {
 	public class State{
     	public int position;
     	public boolean isParked;
-    	public int parkingSpaces;
+    	public int stretch;
     	public State(){
     		position=0;
     		isParked=false;
-    		parkingSpaces=0;
+    		stretch=0;
     	}
     	
     }
+	
+	/*
+	 * Description:
+	 * This class contains the the current position of the cart
+	 * and whether it's is parked or not
+	 * as well as stretch which is a counter of how many open spaces that are adjacent to each other.
+	 * */
 	
 	
 	//---------------------
