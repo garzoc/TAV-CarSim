@@ -1,11 +1,9 @@
-import org.junit.runners.Parameterized;
+package main;
 
 /**
  * Interface file for the Actions file.
  */
-interface ActionsInterface {
-
-    //---------------------
+public interface Parkable {
 
     void MoveForward();
 
@@ -13,10 +11,10 @@ interface ActionsInterface {
      * Description:
      * This method is used to make the car move forward
      * Pre-Condition:
-     * 1. Car is not parked
-     * 2. Car isn't at the end of the street
+     * 1. main.Car is not parked
+     * 2. main.Car isn't at the end of the street
      * Post-Condition:
-     * 1. Car is moved forward by 1 meters
+     * 1. main.Car is moved forward by 1 meters
      * 2. Method returns position of the car
      * Test-Cases:
      * 1. @Test moveForward()
@@ -26,14 +24,14 @@ interface ActionsInterface {
 
     //---------------------
 
-    boolean isEmpty();
+    int isEmpty();
 
     /**
      * Description:
      * This method Checks is there is an empty parking space.
      * Pre-Condition:
-     * 1. Car is not parked
-     * 2. Car is moving forward
+     * 1. main.Car is not parked
+     * 2. main.Car is moving forward
      * Post-Condition:
      * 1. Returns true if adjacent space is empty
      * Test-Cases:
@@ -50,8 +48,8 @@ interface ActionsInterface {
      * Description:
      * This method is used for moving the car backwards
      * Pre-Condition:
-     * 1. Car is not parked
-     * 2. Car is not at the beginning of the street
+     * 1. main.Car is not parked
+     * 2. main.Car is not at the beginning of the street
      * Post-Condition:
      * 1. The car gets moved 1 meter backwards
      * Test-Cases:
@@ -67,7 +65,7 @@ interface ActionsInterface {
      * Description:
      * This method is used for the car to be able to park in a free parking space
      * Pre-Condition:
-     * 1. Car is not parked
+     * 1. main.Car is not parked
      * 2. The car is positioned on the road at the beginning of a free parking space
      * Post-Condition:
      * 1. The car gets parked in a parking space
@@ -83,7 +81,7 @@ interface ActionsInterface {
     /**
      * Description:
      * This method is used for the car to be able to move out of a parkingspace
-     * 1. Car is parked
+     * 1. main.Car is parked
      * Post-Condition:
      * 1. The car gets out of the parking space
      * 2. The car gets placed in front of the parking space that the car was parked in
@@ -94,7 +92,7 @@ interface ActionsInterface {
 
     //---------------------
 
-    int WhereIs();
+    CarState WhereIs();
 
     /**
      * Description:

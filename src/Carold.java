@@ -1,8 +1,8 @@
 
 /**
  * Created by laptop on 2017-02-06.
- */
-public class Car  implements ParkingAssistant {
+
+public class Carold  implements ParkingAssistant {
     private State state=new State();
     private int[] parkingSpaces = new int[100];
     private int stretch = 0;
@@ -19,7 +19,7 @@ public class Car  implements ParkingAssistant {
     }
     
     
-    public  Car(int position, boolean isParked) {
+    public  main.Car(int position, boolean isParked) {
     	state.position = position;
     	state.isParked = isParked;
     	generateMap(spaces);
@@ -97,3 +97,4 @@ public class Car  implements ParkingAssistant {
 }
 
 
+*/

@@ -1,10 +1,13 @@
+package main;
+
 public class Main {
 
 
     public static void main(String[] args) {
         int[] spaces = new int[500];
         generateMap(spaces);
-	    ParkAssistant pa = new ParkAssistant(0,false);
+        CarState carState = new CarState(1,false,0);
+	    Car car = new Car(carState);
 
     }
 
@@ -14,4 +17,5 @@ public class Main {
             System.out.println(spaces[i]);
         }
     }
+
 }
