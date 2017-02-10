@@ -60,15 +60,24 @@ public class CarTest {
     }
     
     
-    /**/
+    /*
+     * Test to see how well the noise filtering works 
+     * The maximum offset is 20
+     * */
     @Test
     public void isEmpty(){
     	Car pa = new Car(2,false);
     	double[] test=pa.isEmpty();
-    	assertEquals(100.0,test[0],20);
+    	//System.out.println(test[0]);
+    	//System.out.println(test[1]);
+    	assertEquals(100.0,test[0],15);
     	//assertEquals(0,test.position);
     }
 
+    
+    /*
+     * Test to see if the car can move forward in a normal situation
+     * */
     @Test
     public void MoveBackward(){
     	Car pa = new Car(100,false);
@@ -76,13 +85,19 @@ public class CarTest {
     	assertEquals(99,state.position);
     }
     
+    
+    /*
+     * Test to see what happens when the car back out of bounds
+     * */
     @Test
     public void MoveBackwardOutOfBounds(){
     	Car pa = new Car(0,false);
     	ParkingAssistant.State state=pa.MoveBackward();
     	assertEquals(0,state.position);
     }
-    
+    /*
+     * Test to see what happens when is out of bounds and tries to back
+     * */
     @Test
     public void MoveBackwardFromOutOfBounds(){
     	Car pa = new Car(500,false);
@@ -90,13 +105,19 @@ public class CarTest {
     	assertEquals(500,state.position);
     }
 
+    
+    /*
+     * Test to see if the car can park
+     * */
     @Test
     public void Park(){
     	Car pa = new Car(0,false);
     	pa.Park();
     	assertEquals(pa.WhereIs().isParked,true);
     }
-    
+    /*
+     * Test to see if the parking is consistent when looking for a parking space
+     * */
     @Test
     public void ParkInFirstSpace(){
     	Car pa = new Car(0,false);
@@ -104,6 +125,9 @@ public class CarTest {
     	assertEquals(8,pa.WhereIs().position);
     }
 
+    /*
+     * Test to see if we can unpark
+     * */
     @Test
     public void UnPark(){
     	Car pa = new Car(0,true);
@@ -112,6 +136,9 @@ public class CarTest {
     	
     }
 
+    /*
+     * test to see if we can use where is
+     * */
     @Test
     public void WhereIs(){
     	Car pa = new Car(0,false);

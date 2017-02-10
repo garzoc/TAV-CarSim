@@ -38,7 +38,11 @@ interface ParkingAssistant {
      * 1. Car is moved forward by 1 meters
      * 2. Method returns position of the car
      * Test-Cases:
-     * 1. @Test moveForward()
+     * 1. @Test MoveForwardOnce()
+     * 2. @Test MoveForwardOutOfBounds()
+     * 3. @Test MoveForwardFromOutOfBounds()
+     * 4. @Test MoveForwardWhileParked()
+     * 
      */
 
 
@@ -54,11 +58,9 @@ interface ParkingAssistant {
      * 1. Car is not parked
      * 2. Car is moving forward
      * Post-Condition:
-     * 1. Returns true if adjacent space is empty
+     * 1. Returns an array of sensors
      * Test-Cases:
      * 1. @Test isEmpty()
-     * 2. Test sensor outputs
-     * 3. Test noise filtering
      * @return 
      */
 
@@ -76,7 +78,8 @@ interface ParkingAssistant {
      * 1. The car gets moved 1 meter backwards
      * Test-Cases:
      * 1. @Test MoveBackward()
-     * 2.
+     * 2. @Test MoveBackwardOutOfBounds()
+     * 3. @Test MoveBackwardFromOutOfBounds()
      */
 
     //---------------------
@@ -92,8 +95,9 @@ interface ParkingAssistant {
      * Post-Condition:
      * 1. The car gets parked in a parking space
      * Test-Cases:
-     * 1. @Test park()
-     * 2.
+     * 1. @Test Park()
+     * 2. @Test ParkInFirstSpace()
+     * 
      */
 
     //---------------------
@@ -109,7 +113,6 @@ interface ParkingAssistant {
      * 2. The car gets placed in front of the parking space that the car was parked in
      * Test-Cases:
      * 1. @Test UnPark()
-     * 2.
      */
 
     //---------------------
@@ -122,7 +125,7 @@ interface ParkingAssistant {
      * Post-Condition:
      * 1.Method returns the position of the car
      * Test-Cases:
-     * 1. @Test Whereis()
+     * 1. @Test WhereIs()
      * 2.
      */
 
