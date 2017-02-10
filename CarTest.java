@@ -227,7 +227,7 @@ public class CarTest {
     	pa.generateMap(spaces);
     	
     	pa.Park();
-    	assertEquals(9,pa.WhereIs().position);
+    	assertTrue(9 == pa.WhereIs().position && pa.WhereIs().isParked);
     }
     
     
@@ -237,8 +237,6 @@ public class CarTest {
      * */
     @Test
     public void ParkWhileParked(){
-    	
-        
     	Car pa = new Car(58,true);
     	assertTrue(58==pa.WhereIs().position && pa.WhereIs().isParked);
     }
@@ -253,7 +251,7 @@ public class CarTest {
     public void UnPark(){
     	Car pa = new Car(0,true);
     	pa.UnPark();
-    	assertEquals(pa.WhereIs().isParked,false);
+    	assertTrue(!pa.WhereIs().isParked && pa.WhereIs().position == 1);
     	
     }
     
@@ -265,7 +263,7 @@ public class CarTest {
     public void UnParkWhileNotParked(){
     	Car pa = new Car(0,false);
     	//pa.UnPark();
-    	assertEquals(pa.WhereIs().isParked,false);
+    	assertTrue(!pa.WhereIs().isParked && pa.WhereIs().position == 0);
     	
     }
     
