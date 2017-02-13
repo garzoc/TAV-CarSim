@@ -1,4 +1,4 @@
-
+package test;
 	/**
 	 * Class for running the test cases
 	 */
@@ -8,19 +8,19 @@
 	import org.junit.runner.notification.Failure;
 public class TestMain {
 
-	
-	
 
 
-	        
+
+
+
 
 
 
 	    public static void main(String[] args) {
-	       
+
 	       // generateMap(spaces);
 		    //Actions pa = new Actions(0,false);
-		    
+
 		    Result result = JUnitCore.runClasses(CarTest.class);
 
 	        for (Failure failure : result.getFailures()) {
@@ -30,7 +30,7 @@ public class TestMain {
 	        System.out.println("\n"+result.wasSuccessful());
 
 	    }
-	    
-	
+
+
 
 }

@@ -1,11 +1,11 @@
 package main;
 
-public class CarState {
+public class State {
     private int position;
     private boolean isParked;
     private int streak;
 
-    public CarState(int pos, boolean isprkd, int strk) {
+    public State(int pos, boolean isprkd, int strk) {
         position = pos;
         isParked = isprkd;
         streak = strk;

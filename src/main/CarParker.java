@@ -1,17 +1,19 @@
+package main;
+
 import java.util.LinkedList;
 
 /**
  * Created by laptop on 2017-02-06.
  */
-public class Car  implements ParkingAssistant {
-	
+public class CarParker  implements Parkable {
+
 	/*
 	 * Keeps the state of the car
-	 * like whether it's parked or not it's position and how many open spaces 
+	 * like whether it's parked or not it's position and how many open spaces
 	 * it has found adjacent to eachother
 	 * */
     private State state=new State();
-   
+
     /*
      * Specifies at which position a certain sensor will fail
      * failPosition1 mapped to sensor 1
@@ -24,9 +26,9 @@ public class Car  implements ParkingAssistant {
      * */
     private int[] spaces = new int[500];
 
-    
+
     public void generateMap(int[] spaces) {
-    	
+
     	/*
     	 * Adds a predefined map to the first cells in spaces
     	 * So that we can defined a constant road when needed
@@ -34,21 +36,21 @@ public class Car  implements ParkingAssistant {
     	for (int i =0; i<spaces.length;i++) {
             this.spaces[i] = spaces[i];
         }
-    	
+
     	/*
     	 * as for the rest create random map of the road
     	 * */
-    
+
         for (int i =spaces.length; i<500;i++) {
             this.spaces[i] = (int) (Math.random()*200);
-          
+
         }
     }
-    
-    
+
+
     public  Car(int position, boolean isParked) {
     	/*
-    	 * set the position of the care and 
+    	 * set the position of the care and
     	 * so that we can test different posintoin without having to use move forward or backward
     	 * */
     	state.position = position;
@@ -57,7 +59,7 @@ public class Car  implements ParkingAssistant {
     	 * while the car is parked without having to use the park method
     	 * */
     	state.isParked = isParked;
-    	
+
     	//generateMap(spaces);
     }
 
@@ -77,7 +79,7 @@ public class Car  implements ParkingAssistant {
                 * current position and if there are 5 open space that means that the car can park there
                 * */
                 if (state.streak >= 5) {
-                	/*set the parking state of the car to true 
+                	/*set the parking state of the car to true
                 	 * and parallel park increment then decrement the position by one
                 	 * */
                 	state.position++;
@@ -109,7 +111,7 @@ public class Car  implements ParkingAssistant {
     	 * the car should not be able to move forward while it's parked
     	 * */
         if (state.isParked) {
-        	
+
             System.out.println("ERROR - PARKED, CANNOT MOVE");
             /*
              * if car is within bounds it can be moved
@@ -120,10 +122,10 @@ public class Car  implements ParkingAssistant {
         	 * */
         	state.position += 1;
         	/*
-        	 * isEmpty return an array where each cell represent the average filtered value from a sensor 
+        	 * isEmpty return an array where each cell represent the average filtered value from a sensor
         	 * */
             double[] data=isEmpty();
-           
+
             /*
              * checks if one or more sensors are disabled by testing if it returned an
              *  invalid number (0) then discard that sensor
@@ -134,17 +136,17 @@ public class Car  implements ParkingAssistant {
             	if(data[n]!=0){
             		count++;
             		avg+=data[n];
-            	}	
+            	}
             }
-            
+
             /*
              * get average from the sensors
-             * 
+             *
              * */
             if(count!=0)
             	avg=avg/count;
-            
-            
+
+
             /*
              * if the average is greater than 150 which means that there is a open space
              * increment streak by one
@@ -152,14 +154,14 @@ public class Car  implements ParkingAssistant {
              * */
             if(avg > 150) state.streak++;
             	else state.streak=0;
-           
+
         }
         /*
          * return the car status
          * */
         return state;
     }
-    
+
     public State MoveBackward() {
     	/*
     	 * reset the streak to zero
@@ -184,13 +186,13 @@ public class Car  implements ParkingAssistant {
          * */
         return state;
     }
-    
-    
-    
-    
+
+
+
+
     public void disableSensor(int pos1,int pos2){
     	/*
-    	 * set the position of when sensor 1 and 2 will fail 
+    	 * set the position of when sensor 1 and 2 will fail
     	 * */
     	failPosition1=pos1;
     	failPosition2=pos2;
@@ -199,9 +201,9 @@ public class Car  implements ParkingAssistant {
     /*
      * read distance with noise and filter that noise*/
     public double[] isEmpty() {
-    	
-    
-    	
+
+
+
     	//prepare an array with 2 sensors each with a space for 5 readings
     	double[][] sensorData= new double[2][5];
     	/*
@@ -209,12 +211,12 @@ public class Car  implements ParkingAssistant {
     	 * */
     	double tmp;
     	/*
-    	 *specify maximum noise so that the noise is somewhat controlled and isn't 
+    	 *specify maximum noise so that the noise is somewhat controlled and isn't
     	 * completely random and breaks the test
     	 * */
     	double max=1.15;
     	/*
-    	 *specify minimum noise so that the noise is somewhat controlled and isn't 
+    	 *specify minimum noise so that the noise is somewhat controlled and isn't
     	 * completely random and breaks the test
     	 * */
     	double min=0.85;
@@ -229,7 +231,7 @@ public class Car  implements ParkingAssistant {
     			/*
     			 * use the map which has been generated and create a small amount noise of based on the min and max values
     			 * noise this allows us to go get similar values if the car goes back to a
-    			 * previous position 
+    			 * previous position
     			 * */
 	    		sensorData[i][n]=(int) (spaces[state.position]* ((tmp=Math.random()*2)<min?min+((1-min)*tmp) : (tmp >max)? (max-(max-1)*(tmp-1)): tmp));
 	    		/*
@@ -239,25 +241,25 @@ public class Car  implements ParkingAssistant {
 	    		if(state.position==failPosition1&&i==0){
 	    			sensorData[i][n]=300;
 	    		}
-	    		
+
 	    		if(state.position==failPosition2&&i==1){
 	    			sensorData[i][n]=300;
 	    		}
-	    		
+
     		}
     		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	}
-    	
-    	
-    	
-    	
+
+
+
+
     	/*
     	 * defined the max and min delta values between the different readings if two or more values are within this
     	 * range they will be added together if not the will get their own group of values
     	 * */
     	double fmax=1.3;
     	double fmin=0.75;
-    	
+
     	/*
     	 *failCount keeps track how how many times a sensor has output an invalid number
     	 * */
@@ -281,7 +283,7 @@ public class Car  implements ParkingAssistant {
     		 * */
     		LinkedList<Double> list=new LinkedList<Double>();
     		/*
-    		 * add the first value to the linked list 
+    		 * add the first value to the linked list
     		 * and so the first value group has one value so increment the count by one
     		 * */
     		list.add(sensorData[i][0]);
@@ -304,13 +306,13 @@ public class Car  implements ParkingAssistant {
     				 * and break
     				 * */
     				if((list.get(x)/count[x])/sensorData[i][n]>fmin && fmax > (list.get(x)/count[x])/sensorData[i][n]){
-    					
+
     					/*
     					 * 230 is the maximum noise values
     					 * if the sensor output is outside the valid range increment failcount by one
     					 * */
     					if(sensorData[i][n]<=0 || sensorData[i][n]>230){
-    						
+
     						failCount[i]++;
     					}else{
     						/*
@@ -324,7 +326,7 @@ public class Car  implements ParkingAssistant {
     			}
     			/*
     			 * if x is equal to the size of the list that means the the values wasn't added to an
-    			 * existing group therefore add it to a new group 
+    			 * existing group therefore add it to a new group
     			 * */
     			if(x==list.size()){
     				/*
@@ -337,16 +339,16 @@ public class Car  implements ParkingAssistant {
 					}else{
 						list.add(sensorData[i][n]);
 					}
-    				
-    			}	
-    		
-    		
+
+    			}
+
+
     		/*
     		 * this values represent the index of the group that has had most values added to it
     		 * */
     		int maxnumberIndex=0;
     		/*
-    		 * loop through the count array and if there a group with more values set 
+    		 * loop through the count array and if there a group with more values set
     		 * maxnumberIndex to that index
     		 * */
     		for(int n=0;n<count.length;n++){
@@ -360,11 +362,11 @@ public class Car  implements ParkingAssistant {
     		if(failCount[i]<2){
     			filteredData[i]=list.get(maxnumberIndex)/count[maxnumberIndex];
     		}else{
-    			
+
     			filteredData[i]=0;
     			//System.out.println(filteredData[i]+"  i "+i);
     		}
-    		
+
     	}
     	/*
     	 * return the value for the two sensor
@@ -385,5 +387,3 @@ public class Car  implements ParkingAssistant {
 
 
 }
-
-
