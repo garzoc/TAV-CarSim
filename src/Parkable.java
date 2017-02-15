@@ -2,7 +2,7 @@
 /**
  * Interface file for the Actions file.
  */
-interface Parkable {
+public interface Parkable {
 
 	public class State{
     	public int position;

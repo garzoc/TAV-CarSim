@@ -21,8 +21,7 @@ public class Car  implements Parkable {
     int failPosition1=-1;
     int failPosition2=-1;
     
-    Sensor sensor1;
-    Sensor sensor2;
+    Sensor sensors[];
     
     /*
      * This array represents the road each cell represents one meter
@@ -31,11 +30,8 @@ public class Car  implements Parkable {
 
     
     public void generateMap(int[] spaces) {
-    	
-    	/*
-    	 * Adds a predefined map to the first cells in spaces
-    	 * So that we can defined a constant road when needed
-    	 * */
+    	//System.out.println(spaces);
+    	if(spaces==null) spaces=new int[0];
     	for (int i =0; i<spaces.length;i++) {
             this.spaces[i] = spaces[i];
         }
@@ -43,7 +39,7 @@ public class Car  implements Parkable {
     	/*
     	 * as for the rest create random map of the road
     	 * */
-    
+    	
         for (int i =spaces.length; i<500;i++) {
             this.spaces[i] = (int) (Math.random()*200);
           
@@ -56,17 +52,16 @@ public class Car  implements Parkable {
     	state.position = position;
     
     	state.isParked = isParked;
-    	this.sensor1=new Ultrasonic();
-    	this.sensor2=new Ultrasonic();
+    	 Sensor newSensors[]={new Ultrasonic(),new Ultrasonic()};
+    	 sensors=newSensors;
     	
     	//generateMap(spaces);
     }
     
-    public  Car(int position, boolean isParked,Sensor sensor1,Sensor sensor2) {
+    public  Car(int position, boolean isParked,Sensor[] sensors) {
     	state.position = position;
     	state.isParked = isParked;
-    	this.sensor1=sensor1;
-    	this.sensor2=sensor2;	
+    	this.sensors=sensors;
     	//generateMap(spaces);
     }
 
@@ -219,14 +214,14 @@ public class Car  implements Parkable {
     			
     			
     			if(state.isParked||(state.position==failPosition1&&i==0)){
-	    			sensor1.disable();
+	    			sensors[i].disable();
 	    		}
     			
     			if(state.isParked||(state.position==failPosition2&&i==1)){
-	    			sensor2.disable();
+	    			sensors[i].disable();
 	    		}
     			
-	    		sensorData[i][n]=sensor1.read(spaces,state.position);
+	    		sensorData[i][n]=sensors[i].read(spaces,state.position);
 	    		/*
 	    		 * When Car is at the specified position sensor will fail and output
 	    		 * invalid values this can be done on both sensors
@@ -235,10 +230,8 @@ public class Car  implements Parkable {
     		}
     		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	}
-    	//System.out.println("efwefwefewfwefwefewf");
-    	sensor1.enable();
-    	sensor2.enable();
-    	
+    
+    	for(int i=0;i<sensors.length;i++) sensors[i].enable();
     	
     	
     	/*
