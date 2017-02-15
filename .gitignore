@@ -1,9 +1,0 @@
-
-.idea/TAV-CarSim.iml
-.idea/modules.xml
-.idea/workspace.xml
-!/hamcrest-core-1.3.jar
-!/junit-4.12.jar
-.idea/uiDesigner.xml
-hamcrest-core-1.3.jar
-junit-4.12.jar
