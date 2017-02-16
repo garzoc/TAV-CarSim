@@ -91,7 +91,7 @@ public class Car  implements Parkable {
                 	 * */
                 	state.position++;
                 	state.isParked = true;
-                	//state.position -= 1;
+                	state.position -= 1;
                 }
             }
     }
@@ -157,7 +157,9 @@ public class Car  implements Parkable {
             	avg=avg/count;
             
             
-            
+            //System.out.println(avg);
+            if(avg > 150) state.streak++;
+            	else state.streak=0;
             //System.out.println("pos is "+state.position+" avg "+avg);
             if(state.streak>=5){
             	//System.out.println("pos is "+state.position+" streak is "+state.streak+" first pos is "+(state.position-state.streak));
@@ -175,14 +177,8 @@ public class Car  implements Parkable {
             	if(i==freeSpaces.size()) freeSpaces.add(new FreeSpace(state.position-state.streak,state.streak));
             	//System.out.println("pos it is "+freeSpaces.get(freeSpaces.size()-1).position);
             }
-            
-          //System.out.println(avg);
-            if(avg > 150) state.streak++;
-            	else state.streak=0;
            
         }
-        
-        
         /*
          * return the car status
          * */

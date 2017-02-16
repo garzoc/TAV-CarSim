@@ -64,7 +64,10 @@ public class MockClass {
 		pa.generateMap(null);
 		double[] map=read("map/MAP.txt");
 		when(actuator.moveF(new Parkable.State(anyInt(),false))).thenReturn(1);
+		when(actuator.moveF(new Parkable.State(499,false))).thenReturn(0);
 		when(actuator.reverse(pa.WhereIs())).thenReturn(-1);
+		when(actuator.reverse(new Parkable.State(0,false))).thenReturn(0);
+		System.out.println(actuator.moveF(new Parkable.State(499,false)));
 		for(int i=0;i<sensors.length;i++)
 			for(int n=0;n<500;n++)
 				when(sensors[i].read(pa.spaces, n)).thenReturn(map[n]);
@@ -80,33 +83,31 @@ public class MockClass {
 	public void test(){
 		
 		//pa.generateMap(null);
+		
 		for(int i=0;i<500;i++){
 			pa.MoveForward();
 		}
+		System.out.println("pos "+pa.WhereIs().position);
 		Parkable.FreeSpace optimal=pa.freeSpaces.getFirst();
 		for(int i=1;i<pa.freeSpaces.size();i++){
 			if(pa.freeSpaces.get(i).size<optimal.size){
 				optimal=pa.freeSpaces.get(i);
 			}
 		}
+		
 		for(int i=0;i<500-optimal.position;i++){
 			pa.MoveBackward();
 		}
 		
+		
 		pa.Park();
 		
+		//System.out.println(pa.WhereIs().position);
 		pa.UnPark();
 		
 		for(int i=pa.WhereIs().position;i<500;i++){
 			pa.MoveForward();
 		}
-		
-		
-		//System.out.println("pos is "+pa.WhereIs().position);
-
-		
-		//assertSame(10,obj.get());
-		
-		//verify(sensors[1],times(5)).read(pa.spaces,1);
+	
 	}
 }
