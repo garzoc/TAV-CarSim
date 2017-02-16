@@ -1,12 +1,9 @@
 
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.mockito.Mockito.*;
 public class MockClass {
 	
     /*
@@ -21,18 +18,44 @@ public class MockClass {
 		sensors[1]=mock(Sensor.class);
 		pa=new Car(0,false,sensors);
 		this.sensors=sensors;
-		for(int i=0;i<pa.spaces.length;i++)
-			when(sensors[0].read(pa.spaces, 1)).thenReturn((double)pa.spaces[i]);
+
+		pa.generateMap(null);
+
+		int pos = 0;
+		int i = 0;
+
+		// Five occupied spaces
+		for(i = pos; pos < i + 5; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(20d);
+
+		// Four empty spaces
+		for(i = pos; pos < i + 4; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(180d);
+
+		// Five occupied
+		for(i = pos; pos < i + 5; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(20d);
+
+		// Five empty
+		for(i = pos; pos < i + 5; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(180d);
+
+		// Two occupied
+		for(i = pos; pos < i + 2; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(20d);
+
+		// Six empty
+		for(i = pos; pos < i + 6; pos++)
+			when(sensors[0].read(pa.spaces, i)).thenReturn(180d);
 		
 	}
 	
 	@Test
 	public void test(){
-		
-		pa.generateMap(null);
+
 		pa.MoveForward();
-		//assertSame(10,obj.get());
-		//obj.get();
+
 		verify(sensors[1],times(5)).read(pa.spaces,1);
+
 	}
 }
