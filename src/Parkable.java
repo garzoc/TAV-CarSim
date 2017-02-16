@@ -14,6 +14,12 @@ public interface Parkable {
     		streak=0;
     	}
     	
+    	public State(int position,boolean parked){
+    		this.position=position;
+    		isParked=parked;
+    		streak=0;
+    	}
+    	
     }
 	
 	/*
@@ -22,6 +28,16 @@ public interface Parkable {
 	 * and whether it's is parked or not
 	 * as well as streak which is a counter of how many open spaces that are adjacent to each other.
 	 * */
+	
+	public class FreeSpace{
+    	public int position;
+    	public int size;
+    	public FreeSpace(int position,int size){
+    		this.position=position;
+    		this.size=size;
+    	}
+    	
+    }
 	
 	
 	//---------------------
