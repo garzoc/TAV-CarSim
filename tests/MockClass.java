@@ -84,10 +84,10 @@ public class MockClass {
 		
 		//pa.generateMap(null);
 		
-		for(int i=0;i<500;i++){
+		for(int i=0;i<499;i++){
 			pa.MoveForward();
 		}
-		System.out.println("pos "+pa.WhereIs().position);
+		
 		Parkable.FreeSpace optimal=pa.freeSpaces.getFirst();
 		for(int i=1;i<pa.freeSpaces.size();i++){
 			if(pa.freeSpaces.get(i).size<optimal.size){
@@ -95,17 +95,17 @@ public class MockClass {
 			}
 		}
 		
-		for(int i=0;i<500-optimal.position;i++){
+		for(int i=0;i<499-optimal.position;i++){
 			pa.MoveBackward();
 		}
 		
 		
 		pa.Park();
-		
+		System.out.println("pos "+pa.WhereIs().position);
 		//System.out.println(pa.WhereIs().position);
 		pa.UnPark();
 		
-		for(int i=pa.WhereIs().position;i<500;i++){
+		for(int i=pa.WhereIs().position;i<499;i++){
 			pa.MoveForward();
 		}
 	
