@@ -161,6 +161,7 @@ public class CarUnitTests {
     	for (int i =10; i<15;i++) 
             spaces[i] = 178;
     	Car pa = new Car(2,false);   	
+    	
     	pa.disableSensor(14, 14);
     	pa.generateMap(spaces);
     	pa.Park();
