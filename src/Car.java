@@ -206,7 +206,7 @@ public class Car  implements Parkable {
     	 * for each sensor read data
     	 * */
     	
-    	for(int i=0;i<2;i++){
+    	for(int i=0;i<2 && !state.isParked;i++){
     		/*
     		 * for each sensor make 5 readings
     		 * */
@@ -253,7 +253,7 @@ public class Car  implements Parkable {
     	/*
     	 * for every sensor when car is not parked
     	 * */
-    	for(int i=0;i<2&&!state.isParked;i++){
+    	for(int i=0;i<2;i++){
     		/*
     		 * this keeps track how many values there are in each group of values
     		 * so we know how what we should divide the sum of each group with
