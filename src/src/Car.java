@@ -112,7 +112,6 @@ public class Car  implements Parkable {
     }
 
     public State MoveForward() {
-    	//System.out.println("hej");
     	/*
     	 * the car should not be able to move forward while it's parked
     	 * */
@@ -127,7 +126,7 @@ public class Car  implements Parkable {
         	 * increment the position of the car
         	 * */
         	//state.position += 1;
-        	state.position+=actuator.moveF(state);
+        	actuator.moveF(state);
         	/*
         	 * isEmpty return an array where each cell represent the average filtered value from a sensor 
         	 * */
@@ -180,7 +179,7 @@ public class Car  implements Parkable {
              * */
         } else {
         	//state.position -= 1;
-        	state.position+=actuator.reverse(state);
+        	actuator.reverse(state);
         	/*when the car is out out of bounds print an error message but don't move it*/
         }/*else {
            System.out.println("ERROR - OUT OF BOUNDS, CANNOT MOVE");
