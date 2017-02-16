@@ -8,10 +8,17 @@
 	import org.junit.runner.notification.Failure;
 public class TestMain {
 
-	    public static void main(String[] args) {
+	
+	
 
-	    	System.out.println("Test");
-	        // generateMap(spaces);
+
+	        
+
+
+
+	    public static void main(String[] args) {
+	       
+	       // generateMap(spaces);
 		    //Actions pa = new Actions(0,false);
 		    
 		    Result result = JUnitCore.runClasses(CarTest.class);

@@ -12,7 +12,7 @@ public interface Actuator {
      *
 	 * @return
 	 */
-	void moveForward(Car.State state);
+	public int moveF(Parkable.State state);
 
 	/**
 	 * Description:
@@ -25,5 +25,5 @@ public interface Actuator {
      *
 	 * @return
 	 */
-	void moveBackward(Car.State state);
+	public int reverse(Parkable.State state);
 }
