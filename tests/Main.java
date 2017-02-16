@@ -13,14 +13,14 @@ public class Main {
 	       // generateMap(spaces);
 		    //Actions pa = new Actions(0,false);
 		    
-		   /* Result result = JUnitCore.runClasses(CarTest.class);
+		   /* Result result = JUnitCore.runClasses(CarUnitTests.class);
 
 	        for (Failure failure : result.getFailures()) {
 	            System.out.println(failure.toString());
 	        }
 
-	        System.out.println("\n"+result.wasSuccessful());
-	        */
+	        System.out.println("\n"+result.wasSuccessful());*/
+	        
 	        
 	       Result mockResult = JUnitCore.runClasses(MockClass.class);
 
@@ -28,7 +28,7 @@ public class Main {
 	            System.out.println(mockResult.toString());
 	        }
 
-	        System.out.println("\n"+mockResult.wasSuccessful());
+	        //System.out.println("\n"+mockResult.wasSuccessful());
 
 
 	    }

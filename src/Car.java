@@ -15,7 +15,13 @@ public class Car  implements Parkable {
     
     public LinkedList<FreeSpace> freeSpaces=new LinkedList<FreeSpace>();
    
-
+    /*
+     * Specifies at which position a certain sensor will fail
+     * failPosition1 mapped to sensor 1
+     * ailPosition2 mapped to sensor 2
+     * */
+    int failPosition1=-1;
+    int failPosition2=-1;
     
     Sensor sensors[];
     Actuator actuator;
@@ -85,7 +91,7 @@ public class Car  implements Parkable {
                 	 * */
                 	state.position++;
                 	state.isParked = true;
-                	//state.position -= 1;
+                	state.position -= 1;
                 }
             }
     }
@@ -151,7 +157,9 @@ public class Car  implements Parkable {
             	avg=avg/count;
             
             
-            
+            //System.out.println(avg);
+            if(avg > 150) state.streak++;
+            	else state.streak=0;
             //System.out.println("pos is "+state.position+" avg "+avg);
             if(state.streak>=5){
             	//System.out.println("pos is "+state.position+" streak is "+state.streak+" first pos is "+(state.position-state.streak));
@@ -169,14 +177,8 @@ public class Car  implements Parkable {
             	if(i==freeSpaces.size()) freeSpaces.add(new FreeSpace(state.position-state.streak,state.streak));
             	//System.out.println("pos it is "+freeSpaces.get(freeSpaces.size()-1).position);
             }
-            
-          //System.out.println(avg);
-            if(avg > 150) state.streak++;
-            	else state.streak=0;
            
         }
-        
-        
         /*
          * return the car status
          * */
@@ -211,22 +213,12 @@ public class Car  implements Parkable {
     
     
     
-    public void disableSensor(boolean sensor1,boolean sensor2){
-    	
-    	if(sensor1)
-    		sensors[0].enable();
-    	else
-    		sensors[0].disable();
-    	
-    	if(sensor2)
-    		sensors[1].enable();
-    	else
-    		sensors[1].disable();
+    public void disableSensor(int pos1,int pos2){
     	/*
     	 * set the position of when sensor 1 and 2 will fail 
     	 * */
-    	//failPosition1=pos1;
-    	//failPosition2=pos2;
+    	failPosition1=pos1;
+    	failPosition2=pos2;
     }
 
     /*
@@ -252,13 +244,13 @@ public class Car  implements Parkable {
     		for(int n=0;n<5;n++){
     			
     			
-    			/*if(state.isParked||(state.position==failPosition1&&i==0)){
+    			if(state.isParked||(state.position==failPosition1&&i==0)){
 	    			sensors[i].disable();
-	    		}*/
+	    		}
     			
-    			/*if(state.isParked||(state.position==failPosition2&&i==1)){
+    			if(state.isParked||(state.position==failPosition2&&i==1)){
 	    			sensors[i].disable();
-	    		}*/
+	    		}
     			
 	    		sensorData[i][n]=sensors[i].read(spaces,state.position);
 	    		/*
@@ -270,7 +262,7 @@ public class Car  implements Parkable {
     		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	}
     
-    	//for(int i=0;i<sensors.length;i++) sensors[i].enable();
+    	for(int i=0;i<sensors.length;i++) sensors[i].enable();
     	
     	
     	/*
