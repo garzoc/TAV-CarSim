@@ -15,22 +15,22 @@ public class Main {
 
 
 
-//		    Result result = JUnitCore.runClasses(CarUnitTests.class);
-//
-//	        for (Failure failure : result.getFailures()) {
-//	            System.out.println(failure.toString());
-//	        }
-//
-//	        System.out.println("\n"+result.wasSuccessful());
+		    Result result = JUnitCore.runClasses(CarUnitTests.class);
+
+	        for (Failure failure : result.getFailures()) {
+	            System.out.println(failure.toString());
+	        }
+
+	        System.out.println("\n"+result.wasSuccessful());
 
 
-//			Result scenario1 = JUnitCore.runClasses(Scenario1.class);
-//			for (Failure failure : scenario1.getFailures()) {
-//				System.out.println(scenario1.toString());
-//			}
-//
-//			System.out.println("\n"+scenario1.getFailureCount());
-//	        System.out.println("\n"+scenario1.wasSuccessful());
+			Result scenario1 = JUnitCore.runClasses(Scenario1.class);
+			for (Failure failure : scenario1.getFailures()) {
+				System.out.println(scenario1.toString());
+			}
+
+			System.out.println("\n"+scenario1.getFailureCount());
+	        System.out.println("\n"+scenario1.wasSuccessful());
 
 
 	

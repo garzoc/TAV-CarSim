@@ -45,9 +45,7 @@ public class Ultrasonic implements Sensor{
 		return sensorData;
 	}
 	
-	public boolean isDisabled(){
-		return this.disabled;
-	}	//getter method
+	
 	public void disable(){
 		this.disabled=true;
 	}			//setter methods

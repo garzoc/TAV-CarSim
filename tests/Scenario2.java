@@ -98,7 +98,7 @@ public class Scenario2 { //rename to Scenario1, mock classes are actually test i
     @Test
     public void test(){
     	
-    	System.out.println("initail pos "+pa.WhereIs().position);
+    	//System.out.println("initail pos "+pa.WhereIs().position);
         
         pa.UnPark();
         pa.MoveForward();
@@ -108,7 +108,7 @@ public class Scenario2 { //rename to Scenario1, mock classes are actually test i
         
        pa.Park();
        boolean state=(pa.WhereIs().position==499 && !pa.WhereIs().isParked)||( (pa.WhereIs().position==251 || pa.WhereIs().position==465) && pa.WhereIs().isParked);
-       System.out.println(pa.WhereIs().position+" "+pa.WhereIs().isParked);
+       //System.out.println(pa.WhereIs().position+" "+pa.WhereIs().isParked);
        assertTrue(state);
 
 

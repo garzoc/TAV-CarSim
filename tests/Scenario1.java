@@ -64,20 +64,23 @@ public class Scenario1 {
 		this.sensors=sensors;
 		pa.generateMap(null);
 		double[] map=read("map/MAP.txt");
+		
 		when(actuator.moveF(new State(anyInt(),false))).thenReturn(1);
-		when(actuator.moveF(new State(499,false))).thenReturn(0);
+		//when(actuator.moveF(new State(499,false))).thenReturn(0);
+		
 		when(actuator.reverse(pa.WhereIs())).thenReturn(-1);
 		when(actuator.reverse(new State(0,false))).thenReturn(0);
-		System.out.println(actuator.moveF(new State(499,false)));
+		
+		//System.out.println(actuator.moveF(new State(499,false)));
 		for(int i=0;i<sensors.length;i++)
 			for(int n=0;n<500;n++)
 				when(sensors[i].read(pa.spaces, n)).thenReturn(map[n]);
 		
 		
 	
-		for(int i=250;i<pa.spaces.length;i++)
-			when(sensors[0].read(pa.spaces,i)).thenReturn(0.0);
-		
+//		for(int i=250;i<pa.spaces.length;i++)
+//			when(sensors[0].read(pa.spaces,i)).thenReturn(0.0);
+//		
 	}
 	
 	@Test
@@ -102,7 +105,7 @@ public class Scenario1 {
 		
 		
 		pa.Park();
-		System.out.println("pos "+pa.WhereIs().position);
+		//System.out.println("pos "+pa.WhereIs().position);
 		//System.out.println(pa.WhereIs().position);
 		pa.UnPark();
 		

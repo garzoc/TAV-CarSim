@@ -84,9 +84,9 @@ public class Car  implements Parkable {
                 	/*set the parking state of the car to true 
                 	 * and parallel park increment then decrement the position by one
                 	 * */
-                	state.position++;
+                	//state.position++;
                 	state.isParked = true;
-                	state.position -= 1;
+                	//state.position -= 1;
                 }
             }
     }
