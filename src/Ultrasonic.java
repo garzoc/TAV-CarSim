@@ -11,9 +11,9 @@ public class Ultrasonic implements Sensor{
 //		return 10;
 //	}
 //
-	public int read(int []spaces,int pos){
+	public double read(double []spaces,int pos){
 		//prepare an array with 2 sensors each with a space for 5 readings
-    	int sensorData=0;
+    	double sensorData=0;
     	/*
     	 * tmp is the noise factor which is randomly generated
     	 * */
@@ -27,8 +27,8 @@ public class Ultrasonic implements Sensor{
     			 * noise this allows us to go get similar values if the car goes back to a
     			 * previous position 
     			 * */
-	    		double o = (spaces[pos]* ((tmp=Math.random()*2)<min?min+((1-min)*tmp) : (tmp >max)? (max-(max-1)*(tmp-1)): tmp));
-	    		sensorData = (int) o;
+	    		 sensorData = (spaces[pos]* ((tmp=Math.random()*2)<min?min+((1-min)*tmp) : (tmp >max)? (max-(max-1)*(tmp-1)): tmp));
+	    	//	sensorData = (int) o;
 				/*
 	    		 * When Car is at the specified position sensor will fail and output
 	    		 * invalid values this can be done on both sensors
