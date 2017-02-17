@@ -22,16 +22,15 @@ public class Car  implements Parkable {
 	/*
      * This array represents the road each cell represents one meter
      */
-    Sensor sensors[];
+    Sensor ultrasonics[];
     Actuator carEngine;
 
 
-    public double[] spaces = new double[500];
-    
-    
-    public void generateMap(double[] spaces) {
+    public int[] spaces = new int[500];
+
+    public void generateMap(int[] spaces) {
     	//System.out.println(spaces);
-    	if(spaces==null) spaces=new double[0];
+    	if(spaces==null) spaces=new int[0];
     	for (int i =0; i<spaces.length;i++) {
             this.spaces[i] = spaces[i];
         }
@@ -41,7 +40,7 @@ public class Car  implements Parkable {
     	 * */
     	
         for (int i =spaces.length; i<500;i++) {
-            this.spaces[i] = (Math.random()*200);
+            this.spaces[i] = (int) (Math.random()*200);
           
         }
     }
@@ -50,9 +49,9 @@ public class Car  implements Parkable {
    
     	state.position = position;
 		state.isParked = isParked;
-    	this.sensors = new Ultrasonic[2];
-    	this.sensors[0] = new Ultrasonic();
-    	this.sensors[1] = new Ultrasonic();
+    	this.ultrasonics = new Ultrasonic[2];
+    	this.ultrasonics[0] = new Ultrasonic();
+    	this.ultrasonics[1] = new Ultrasonic();
     	this.carEngine=new CarEngine();
     	//generateMap(spaces);
     }
@@ -60,14 +59,14 @@ public class Car  implements Parkable {
     public  Car(int position, boolean isParked,Sensor[] ultrasonics) {
     	state.position = position;
     	state.isParked = isParked;
-    	this.sensors=ultrasonics;
+    	this.ultrasonics=ultrasonics;
     	this.carEngine=new CarEngine();
     }
     
     public  Car(int position, boolean isParked,Sensor[] ultrasonics,Actuator carEngine) {
     	state.position = position;
     	state.isParked = isParked;
-    	this.sensors=ultrasonics;
+    	this.ultrasonics=ultrasonics;
     	this.carEngine=carEngine;
     }
 
@@ -233,28 +232,28 @@ public class Car  implements Parkable {
     		/*
     		 * for each sensor make 5 readings
     		 * */
-    		sensors[i].enable();
     		for(int n=0;n<5;n++){
     			
     			
     			if(state.isParked||(state.position==failPosition1&&i==0)){
-	    			sensors[i].disable();
+	    			ultrasonics[i].disable();
 	    		}
     			
     			if(state.isParked||(state.position==failPosition2&&i==1)){
-	    			sensors[i].disable();
+	    			ultrasonics[i].disable();
 	    		}
     			
-	    		sensorData[i][n]=sensors[i].read(spaces,state.position);
+	    		sensorData[i][n]=ultrasonics[i].read(spaces,state.position);
 	    		/*
 	    		 * When Car is at the specified position sensor will fail and output
 	    		 * invalid values this can be done on both sensors
 	    		 * */
 	    		
     		}
+    		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	}
     
-    	//for(int i=0;i<sensors.length;i++) sensors[i].enable();
+    	for(int i=0;i<ultrasonics.length;i++) ultrasonics[i].enable();
     	
     	
     	/*
@@ -366,7 +365,6 @@ public class Car  implements Parkable {
     		 * otherwise set the values to 0
     		 * */
     		if(failCount[i]<2){
-    			sensors[i].disable();
     			filteredData[i]=list.get(maxnumberIndex)/count[maxnumberIndex];
     		}else{
     			

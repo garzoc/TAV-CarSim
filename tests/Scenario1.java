@@ -20,11 +20,11 @@ import org.junit.Test;
 public class Scenario1 {
 	
 	
-	public double[]read(String filename){
+	public int[]read(String filename){
 		try {
 			FileReader fileReader=new FileReader(filename);
 			BufferedReader bufferReader =new BufferedReader(fileReader);
-			double[] lines=new double[500];
+			int[] lines=new int[500];
 			//List<Double> lines =new ArrayList<Double>();
 			String line=null;
 			int i=0;
@@ -63,7 +63,7 @@ public class Scenario1 {
 		pa=new Car(0,false,sensors,actuator);
 		this.sensors=sensors;
 		pa.generateMap(null);
-		double[] map=read("map/MAP.txt");
+		int[] map=read("map/MAP.txt");
 		when(actuator.moveF(new State(anyInt(),false))).thenReturn(1);
 		when(actuator.moveF(new State(499,false))).thenReturn(0);
 		when(actuator.reverse(pa.WhereIs())).thenReturn(-1);
@@ -76,7 +76,7 @@ public class Scenario1 {
 		
 	
 		for(int i=250;i<pa.spaces.length;i++)
-			when(sensors[0].read(pa.spaces,i)).thenReturn(0.0);
+			when(sensors[0].read(pa.spaces,i)).thenReturn(0);
 		
 	}
 	
