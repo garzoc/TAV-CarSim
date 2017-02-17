@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-public class Scenario1 { //rename to Scenario1, mock classes are actually test implementations of interfaces to be mocked
+public class Scenario1 {
 	
 	
 	public int[]read(String filename){
@@ -29,7 +29,7 @@ public class Scenario1 { //rename to Scenario1, mock classes are actually test i
 			String line=null;
 			int i=0;
 			while((line=bufferReader.readLine())!=null&&i<500){
-				lines[i]=Integer.parseInt(line);
+				lines[i]=(int)Double.parseDouble(line);
 				//lines.add(Double.parseDouble(line));
 				i++;
 			}
@@ -109,6 +109,6 @@ public class Scenario1 { //rename to Scenario1, mock classes are actually test i
 		for(int i=pa.WhereIs().position;i<499;i++){
 			pa.MoveForward();
 		}
-	
+		assert(true);
 	}
 }

@@ -126,7 +126,7 @@ public class Car  implements Parkable {
         	/*
         	 * isEmpty return an array where each cell represent the average filtered value from a sensor 
         	 * */
-            int[] data=isEmpty();
+            double[] data=isEmpty();
            
             /*
              * checks if one or more sensors are disabled by testing if it returned an
@@ -214,12 +214,12 @@ public class Car  implements Parkable {
     /*
      * read distance with noise and filter that noise
      */
-    public int[] isEmpty() {
+    public double[] isEmpty() {
     	
     	//for(int k=0;k<5;k++) this.sensor1.read();
     	
     	//prepare an array with 2 sensors each with a space for 5 readings
-    	int[][] sensorData= new int[2][5];
+    	double[][] sensorData= new double[2][5];
     	/*
     	 * tmp is the noise factor which is randomly generated
     	 * */
@@ -270,7 +270,7 @@ public class Car  implements Parkable {
     	/*
     	 * this array represent the two sensors
     	 * */
-    	int[] filteredData=new int[2];
+    	double[] filteredData=new double[2];
     	
     	/*
     	 * for every sensor when car is not parked
@@ -285,7 +285,7 @@ public class Car  implements Parkable {
     		 * this keeps track of the sum for each group of values
     		 * so we later can calculate the average values
     		 * */
-    		LinkedList<Integer> list=new LinkedList<Integer>();
+    		LinkedList<Double> list=new LinkedList<Double>();
     		/*
     		 * add the first value to the linked list 
     		 * and so the first value group has one value so increment the count by one

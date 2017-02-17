@@ -26,20 +26,21 @@ public class Main {
 	        System.out.println("\n"+result.wasSuccessful());*/
 
 
-	       	Result mockResult = JUnitCore.runClasses(UnitMocks.class);
-	        for (Failure failure : mockResult.getFailures()) {
-	            System.out.println(mockResult.toString());
-	        }
+//	       	Result mockResult = JUnitCore.runClasses(UnitMocks.class);
+//	        for (Failure failure : mockResult.getFailures()) {
+//	            System.out.println(mockResult.getFailures().toString());
+//	        }
 
 			Result scenario1 = JUnitCore.runClasses(Scenario1.class);
 			for (Failure failure : scenario1.getFailures()) {
-				System.out.println(scenario1.toString());
+				System.out.println(scenario1.getFailures().toString());
 			}
+			System.out.println(scenario1.getFailureCount());
 
-			Result scenario2 = JUnitCore.runClasses(Scenario2.class);
-			for (Failure failure : scenario2.getFailures()) {
-				System.out.println(scenario2.toString());
-			}
+//			Result scenario2 = JUnitCore.runClasses(Scenario2.class);
+//			for (Failure failure : scenario2.getFailures()) {
+//				System.out.println(scenario2.toString());
+//			}
 
 
 	        //System.out.println("\n"+mockResult.wasSuccessful());
