@@ -1,8 +1,7 @@
-package src;
 
 public interface Sensor {
 
-	int read(int[] road, int pos);
+	double read(double[] road, int pos);
 	/**
 	 * Method used for reading a sensor.
 	 * Pre-Condition

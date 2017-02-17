@@ -49,7 +49,7 @@ public class CarUnitTests {
     @Test
     public void isEmptySensor1(){
     	
-    	int []spaces=new int[10];
+    	double []spaces=new double[10];
     	for (int i =0; i<10;i++) 
             spaces[i] = 100;
         
@@ -59,6 +59,7 @@ public class CarUnitTests {
     	double[] test=pa.isEmpty();
     	//System.out.println(test[0]);
     	//System.out.println(test[1]);
+    	//System.out.println("sensor "+test[0]);
     	assertEquals(100.0,test[0],15);
     }
     
@@ -66,7 +67,7 @@ public class CarUnitTests {
     @Test
     public void isEmptySensor2(){
     	
-    	int []spaces=new int[10];
+    	double []spaces=new double[10];
     	for (int i =0; i<10;i++) 
             spaces[i] = 100;
         
@@ -99,7 +100,7 @@ public class CarUnitTests {
     public void MoveBackward(){
     
     	Car pa = new Car(100,false);
-    	pa.generateMap(new int[0]);
+    	pa.generateMap(new double[0]);
     	State state=pa.MoveBackward();
     	assertEquals(99,state.position);
     }
@@ -108,7 +109,7 @@ public class CarUnitTests {
     @Test
     public void MoveBackwardOutOfBounds(){
     	Car pa = new Car(0,false);
-    	pa.generateMap(new int[0]);
+    	pa.generateMap(new double[0]);
     	State state=pa.MoveBackward();
     	assertEquals(0,state.position);
     }
@@ -135,7 +136,7 @@ public class CarUnitTests {
     @Test
     public void oneSensorDisabledPark(){
     	
-    	int []spaces=new int[15];
+    	double []spaces=new double[15];
     	for (int i =0; i<10;i++) 
             spaces[i] = 100;
     	for (int i =10; i<15;i++) 
@@ -145,7 +146,7 @@ public class CarUnitTests {
     	pa.disableSensor(-1, 13);
     	pa.generateMap(spaces);
     	pa.Park();
-    	assertTrue(pa.WhereIs().isParked && pa.WhereIs().position==14);
+    	assertTrue(pa.WhereIs().isParked && pa.WhereIs().position==14.0);
 
 
     }
@@ -155,7 +156,7 @@ public class CarUnitTests {
     public void allSensorsDiabledPark(){
     	
     	
-    	int []spaces=new int[16];
+    	double []spaces=new double[16];
     	for (int i =0; i<10;i++) 
             spaces[i] = 100;
     	for (int i =10; i<15;i++) 
@@ -174,7 +175,7 @@ public class CarUnitTests {
     @Test
     public void Park(){
     	
-    	int []spaces={100,100,100,100,100,178,100,100,178,178,178,178,100,178,178,178,178,178};
+    	double []spaces={100,100,100,100,100,178,100,100,178,178,178,178,100,178,178,178,178,178};
     
     	Car pa = new Car(0,false);
     	pa.generateMap(spaces);
@@ -185,7 +186,7 @@ public class CarUnitTests {
     
     @Test
     public void ParkInFirstSpace(){
-    	int []spaces=new int[15];
+    	double []spaces=new double[15];
     	for (int i =0; i<5;i++) spaces[i] = 100;
     	for (int i =5; i<10;i++) spaces[i] = 178;
         
