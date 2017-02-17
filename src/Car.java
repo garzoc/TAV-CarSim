@@ -1,37 +1,33 @@
 import java.util.LinkedList;
 
-
-/**
- * Created by laptop on 2017-02-06.
- */
 public class Car  implements Parkable {
 	
 	/*
 	 * Keeps the state of the car
 	 * like whether it's parked or not it's position and how many open spaces 
 	 * it has found adjacent to eachother
-	 * */
+	 */
     private State state=new State();
-    
-    public LinkedList<FreeSpace> freeSpaces=new LinkedList<FreeSpace>();
-   
-    /*
+
+	/*
      * Specifies at which position a certain sensor will fail
      * failPosition1 mapped to sensor 1
      * ailPosition2 mapped to sensor 2
-     * */
+     */
+    public LinkedList<FreeSpace> freeSpaces=new LinkedList<>();
+
     int failPosition1=-1;
     int failPosition2=-1;
-    
-    Sensor sensors[];
-    Actuator actuator;
-    
-    /*
+
+	/*
      * This array represents the road each cell represents one meter
-     * */
+     */
+    Ultrasonic ultrasonics[];
+    CarEngine carEngine;
+
+
     public int[] spaces = new int[500];
 
-    
     public void generateMap(int[] spaces) {
     	//System.out.println(spaces);
     	if(spaces==null) spaces=new int[0];
@@ -48,32 +44,30 @@ public class Car  implements Parkable {
           
         }
     }
-    
-    
+
     public  Car(int position, boolean isParked) {
    
     	state.position = position;
-    
-    	state.isParked = isParked;
-    	 Sensor newSensors[]={new Ultrasonic(),new Ultrasonic()};
-    	 sensors=newSensors;
-    	 this.actuator=new CarEngine();
-    	
+		state.isParked = isParked;
+    	this.ultrasonics = new Ultrasonic[2];
+    	this.ultrasonics[0] = new Ultrasonic();
+    	this.ultrasonics[1] = new Ultrasonic();
+    	this.carEngine=new CarEngine();
     	//generateMap(spaces);
     }
     
-    public  Car(int position, boolean isParked,Sensor[] sensors) {
+    public  Car(int position, boolean isParked,Ultrasonic[] ultrasonics) {
     	state.position = position;
     	state.isParked = isParked;
-    	this.sensors=sensors;
-    	this.actuator=new CarEngine();
+    	this.ultrasonics=ultrasonics;
+    	this.carEngine=new CarEngine();
     }
     
-    public  Car(int position, boolean isParked,Sensor[] sensors,Actuator actuator) {
+    public  Car(int position, boolean isParked,Ultrasonic[] ultrasonics,CarEngine carEngine) {
     	state.position = position;
     	state.isParked = isParked;
-    	this.sensors=sensors;
-    	this.actuator=actuator;
+    	this.ultrasonics=ultrasonics;
+    	this.carEngine=carEngine;
     }
 
     public void Park() {
@@ -82,7 +76,7 @@ public class Car  implements Parkable {
             
                 State state=MoveForward();
                /*
-                * strtch keeps track of how many ajdecent openspaces there are adjacent to eacheother from the
+                * stretch keeps track of how many ajdecent openspaces there are adjacent to eacheother from the
                 * current position and if there are 5 open space that means that the car can park there
                 * */
                 if (state.streak >= 5) {
@@ -114,7 +108,6 @@ public class Car  implements Parkable {
     }
 
     public State MoveForward() {
-    	//System.out.println("hej");
     	/*
     	 * the car should not be able to move forward while it's parked
     	 * */
@@ -129,7 +122,7 @@ public class Car  implements Parkable {
         	 * increment the position of the car
         	 * */
         	//state.position += 1;
-        	state.position+=actuator.moveF(state);
+        	state.position+=carEngine.moveF(state);
         	/*
         	 * isEmpty return an array where each cell represent the average filtered value from a sensor 
         	 * */
@@ -200,7 +193,7 @@ public class Car  implements Parkable {
              * */
         } else {
         	//state.position -= 1;
-        	state.position+=actuator.reverse(state);
+        	state.position+=carEngine.reverse(state);
         	/*when the car is out out of bounds print an error message but don't move it*/
         }/*else {
            System.out.println("ERROR - OUT OF BOUNDS, CANNOT MOVE");
@@ -209,9 +202,6 @@ public class Car  implements Parkable {
         
         return state;
     }
-    
-    
-    
     
     public void disableSensor(int pos1,int pos2){
     	/*
@@ -222,7 +212,8 @@ public class Car  implements Parkable {
     }
 
     /*
-     * read distance with noise and filter that noise*/
+     * read distance with noise and filter that noise
+     */
     public double[] isEmpty() {
     	
     	//for(int k=0;k<5;k++) this.sensor1.read();
@@ -245,14 +236,14 @@ public class Car  implements Parkable {
     			
     			
     			if(state.isParked||(state.position==failPosition1&&i==0)){
-	    			sensors[i].disable();
+	    			ultrasonics[i].disable();
 	    		}
     			
     			if(state.isParked||(state.position==failPosition2&&i==1)){
-	    			sensors[i].disable();
+	    			ultrasonics[i].disable();
 	    		}
     			
-	    		sensorData[i][n]=sensors[i].read(spaces,state.position);
+	    		sensorData[i][n]=ultrasonics[i].read(spaces,state.position);
 	    		/*
 	    		 * When Car is at the specified position sensor will fail and output
 	    		 * invalid values this can be done on both sensors
@@ -262,7 +253,7 @@ public class Car  implements Parkable {
     		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	}
     
-    	for(int i=0;i<sensors.length;i++) sensors[i].enable();
+    	for(int i=0;i<ultrasonics.length;i++) ultrasonics[i].enable();
     	
     	
     	/*
@@ -396,11 +387,4 @@ public class Car  implements Parkable {
 		return state;
     }
 
-
-
-
-
-
 }
-
-

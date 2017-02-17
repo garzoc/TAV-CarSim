@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-public class MockClass { //rename to Scenario1, mock classes are actually test implementations of interfaces to be mocked
+public class Scenario1 { //rename to Scenario1, mock classes are actually test implementations of interfaces to be mocked
 	
 	
 	public double[]read(String filename){

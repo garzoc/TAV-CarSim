@@ -1,25 +1,23 @@
 
 public class Ultrasonic implements Sensor{
-	
+
 	private boolean disabled;
-	
 	public Ultrasonic(){
 		disabled=false;
-		
 	}
-	
-	public int get(){
-		
-		return 10;
-	}
-	
-	public double read(int []spaces,int pos){
+
+//	what is this?
+//	public int get(){
+//		return 10;
+//	}
+//
+	public int read(int []spaces,int pos){
 		//prepare an array with 2 sensors each with a space for 5 readings
-    	double sensorData=0;
+    	int sensorData=0;
     	/*
     	 * tmp is the noise factor which is randomly generated
     	 * */
-    	double tmp=0;
+    	double tmp;
     	double max=1.15;
     	double min=0.85;
 
@@ -29,8 +27,9 @@ public class Ultrasonic implements Sensor{
     			 * noise this allows us to go get similar values if the car goes back to a
     			 * previous position 
     			 * */
-	    		sensorData=(int) (spaces[pos]* ((tmp=Math.random()*2)<min?min+((1-min)*tmp) : (tmp >max)? (max-(max-1)*(tmp-1)): tmp));
-	    		/*
+	    		double o = (spaces[pos]* ((tmp=Math.random()*2)<min?min+((1-min)*tmp) : (tmp >max)? (max-(max-1)*(tmp-1)): tmp));
+	    		sensorData = (int) o;
+				/*
 	    		 * When Car is at the specified position sensor will fail and output
 	    		 * invalid values this can be done on both sensors
 	    		 * */
@@ -40,7 +39,7 @@ public class Ultrasonic implements Sensor{
 	    		
 	    		
     		
-    		//System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
+    		//And this? System.out.println("max regulation "+(max-(max-1)*(tmp-1)));
     	
 	
 		return sensorData;
@@ -48,12 +47,10 @@ public class Ultrasonic implements Sensor{
 	
 	public boolean isDisabled(){
 		return this.disabled;
-	}
-	
+	}	//getter method
 	public void disable(){
 		this.disabled=true;
-	}
-	
+	}			//setter methods
 	public void enable(){
 		this.disabled=false;
 	}
