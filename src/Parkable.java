@@ -28,7 +28,7 @@ public interface Parkable {
 
     //---------------------
 
-    double[] isEmpty();
+    int[] isEmpty();
 
     /**
      * Description:
