@@ -22,8 +22,8 @@ public class Car  implements Parkable {
 	/*
      * This array represents the road each cell represents one meter
      */
-    Ultrasonic ultrasonics[];
-    CarEngine carEngine;
+    Sensor ultrasonics[];
+    Actuator carEngine;
 
 
     public int[] spaces = new int[500];
@@ -56,14 +56,14 @@ public class Car  implements Parkable {
     	//generateMap(spaces);
     }
     
-    public  Car(int position, boolean isParked,Ultrasonic[] ultrasonics) {
+    public  Car(int position, boolean isParked,Sensor[] ultrasonics) {
     	state.position = position;
     	state.isParked = isParked;
     	this.ultrasonics=ultrasonics;
     	this.carEngine=new CarEngine();
     }
     
-    public  Car(int position, boolean isParked,Ultrasonic[] ultrasonics,CarEngine carEngine) {
+    public  Car(int position, boolean isParked,Sensor[] ultrasonics,Actuator carEngine) {
     	state.position = position;
     	state.isParked = isParked;
     	this.ultrasonics=ultrasonics;

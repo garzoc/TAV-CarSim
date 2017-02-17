@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.junit.Before;
@@ -19,16 +20,16 @@ import org.junit.Test;
 public class Scenario1 { //rename to Scenario1, mock classes are actually test implementations of interfaces to be mocked
 	
 	
-	public double[]read(String filename){
+	public int[]read(String filename){
 		try {
 			FileReader fileReader=new FileReader(filename);
 			BufferedReader bufferReader =new BufferedReader(fileReader);
-			double[] lines=new double[500];
+			int[] lines=new int[500];
 			//List<Double> lines =new ArrayList<Double>();
 			String line=null;
 			int i=0;
 			while((line=bufferReader.readLine())!=null&&i<500){
-				lines[i]=Double.parseDouble(line);
+				lines[i]=Integer.parseInt(line);
 				//lines.add(Double.parseDouble(line));
 				i++;
 			}
@@ -62,12 +63,12 @@ public class Scenario1 { //rename to Scenario1, mock classes are actually test i
 		pa=new Car(0,false,sensors,actuator);
 		this.sensors=sensors;
 		pa.generateMap(null);
-		double[] map=read("map/MAP.txt");
-		when(actuator.moveF(new Parkable.State(anyInt(),false))).thenReturn(1);
-		when(actuator.moveF(new Parkable.State(499,false))).thenReturn(0);
+		int[] map=read("map/MAP.txt");
+		when(actuator.moveF(new State(anyInt(),false))).thenReturn(1);
+		when(actuator.moveF(new State(499,false))).thenReturn(0);
 		when(actuator.reverse(pa.WhereIs())).thenReturn(-1);
-		when(actuator.reverse(new Parkable.State(0,false))).thenReturn(0);
-		System.out.println(actuator.moveF(new Parkable.State(499,false)));
+		when(actuator.reverse(new State(0,false))).thenReturn(0);
+		System.out.println(actuator.moveF(new State(499,false)));
 		for(int i=0;i<sensors.length;i++)
 			for(int n=0;n<500;n++)
 				when(sensors[i].read(pa.spaces, n)).thenReturn(map[n]);
@@ -75,7 +76,7 @@ public class Scenario1 { //rename to Scenario1, mock classes are actually test i
 		
 	
 		for(int i=250;i<pa.spaces.length;i++)
-			when(sensors[0].read(pa.spaces,i)).thenReturn(0.0);
+			when(sensors[0].read(pa.spaces,i)).thenReturn(0);
 		
 	}
 	
@@ -88,7 +89,7 @@ public class Scenario1 { //rename to Scenario1, mock classes are actually test i
 			pa.MoveForward();
 		}
 		
-		Parkable.FreeSpace optimal=pa.freeSpaces.getFirst();
+		FreeSpace optimal=pa.freeSpaces.getFirst();
 		for(int i=1;i<pa.freeSpaces.size();i++){
 			if(pa.freeSpaces.get(i).size<optimal.size){
 				optimal=pa.freeSpaces.get(i);

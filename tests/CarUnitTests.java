@@ -16,14 +16,14 @@ public class CarUnitTests {
     @Test
     public void MoveForwardOnce() {
     	Car pa = new Car(0,false);
-    	Parkable.State state=pa.MoveForward();
+    	State state=pa.MoveForward();
     	assertEquals(1,state.position);
     }
 
     @Test
     public void MoveForwardOutOfBounds() {
     	Car pa = new Car(499,false);
-    	Parkable.State state=pa.MoveForward();
+    	State state=pa.MoveForward();
     	assertEquals(499,state.position);
     }
     
@@ -40,7 +40,7 @@ public class CarUnitTests {
     @Test
     public void MoveForwardWhileParked() {
     	Car pa = new Car(50,true);
-    	Parkable.State state=pa.MoveForward();
+    	State state=pa.MoveForward();
     	assertEquals(50,state.position);
     }
     
@@ -100,7 +100,7 @@ public class CarUnitTests {
     
     	Car pa = new Car(100,false);
     	pa.generateMap(new int[0]);
-    	Parkable.State state=pa.MoveBackward();
+    	State state=pa.MoveBackward();
     	assertEquals(99,state.position);
     }
     
@@ -109,7 +109,7 @@ public class CarUnitTests {
     public void MoveBackwardOutOfBounds(){
     	Car pa = new Car(0,false);
     	pa.generateMap(new int[0]);
-    	Parkable.State state=pa.MoveBackward();
+    	State state=pa.MoveBackward();
     	assertEquals(0,state.position);
     }
  
@@ -126,7 +126,7 @@ public class CarUnitTests {
     @Test
     public void MoveBackwardWhileParked() {
     	Car pa = new Car(50,true);
-    	Parkable.State state=pa.MoveBackward();
+    	State state=pa.MoveBackward();
     	assertEquals(50,state.position);
     }
 
@@ -235,7 +235,7 @@ public class CarUnitTests {
     public void WhereIs(){
     	Car pa = new Car(0,false);
    
-    	Parkable.State test=pa.WhereIs();
+    	State test=pa.WhereIs();
     	//assertEquals();
     	assertTrue(0==test.position&&test.isParked==false);
     	//assertEquals(true,test.isParked);
