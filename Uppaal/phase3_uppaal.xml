@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+broadcast chan channel;</declaration>
+	<template>
+		<name>Sensors</name>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+	</template>
+	<template>
+		<name x="5" y="5">Car</name>
+		<declaration>// Place local declarations here.
+//int street[5] := {1,2,3,4,5};
+//int parkingspace[2] := {2,4};
+int x := 3;</declaration>
+		<location id="id1" x="365" y="-8">
+			<name x="355" y="-42">end</name>
+		</location>
+		<location id="id2" x="136" y="-8">
+			<name x="126" y="-42">addone</name>
+		</location>
+		<location id="id3" x="-8" y="-8">
+			<name x="-18" y="-42">start</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id1"/>
+			<nail x="153" y="119"/>
+			<nail x="263" y="119"/>
+			<nail x="263" y="119"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="42" y="-34">x&lt;2</label>
+		</transition>
+	</template>
+	<template>
+		<name>Street</name>
+		<declaration>int y := 3;</declaration>
+		<location id="id4" x="0" y="0">
+		</location>
+		<init ref="id4"/>
+	</template>
+	<system>// Place template instantiations here.
+CarProcess = Street();
+StreetProcess = Car();
+SensorProcess = Sensors();
+
+// List one or more processes to be composed into a system.
+system CarProcess, StreetProcess, SensorProcess;
+
+</system>
+	<queries>
+	</queries>
+</nta>
