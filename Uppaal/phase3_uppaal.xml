@@ -44,7 +44,9 @@ int x := 3;</declaration>
 	</template>
 	<template>
 		<name>Street</name>
-		<declaration>int y := 3;</declaration>
+		<declaration>int length := 5;
+int parkingSpaces := 2;
+</declaration>
 		<location id="id4" x="0" y="0">
 		</location>
 		<init ref="id4"/>
