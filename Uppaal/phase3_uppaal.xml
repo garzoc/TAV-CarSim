@@ -1,57 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
-<nta>
-	<declaration>// Place global declarations here.
-broadcast chan channel;</declaration>
-	<template>
-		<name>Sensors</name>
-		<location id="id0" x="0" y="0">
-		</location>
-		<init ref="id0"/>
-	</template>
-	<template>
-		<name x="5" y="5">Car</name>
-		<declaration>// Place local declarations here.
-//int street[5] := {1,2,3,4,5};
-//int parkingspace[2] := {2,4};
-int x := 3;</declaration>
-		<location id="id1" x="365" y="-8">
-			<name x="355" y="-42">end</name>
-		</location>
-		<location id="id2" x="136" y="-8">
-			<name x="126" y="-42">addone</name>
-		</location>
-		<location id="id3" x="-8" y="-8">
-			<name x="-18" y="-42">start</name>
-		</location>
-		<init ref="id3"/>
-		<transition>
-			<source ref="id3"/>
-			<target ref="id1"/>
-			<nail x="153" y="119"/>
-			<nail x="263" y="119"/>
-			<nail x="263" y="119"/>
-		</transition>
-		<transition>
-			<source ref="id2"/>
-			<target ref="id1"/>
-		</transition>
-		<transition>
-			<source ref="id3"/>
-			<target ref="id2"/>
-			<label kind="guard" x="42" y="-34">x&lt;2</label>
-		</transition>
-	</template>
-	<template>
-		<name>Street</name>
-		<declaration>int length := 5;
-int parkingSpaces := 2;
-</declaration>
-		<location id="id4" x="0" y="0">
-		</location>
-		<init ref="id4"/>
-	</template>
-	<system>// Place template instantiations here.
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+</declaration><template><name>Sensors</name><location id="id0" x="0" y="0"></location><init ref="id0"/></template><template><name x="5" y="5">Car</name><declaration>// Street position
+int position := 0;
+// Target parking space
+int parkingSpace = -1;
+// Direction -- 1 is forward, -1 is backward
+int direction = 1;</declaration><location id="id1" x="48" y="96" color="#ffa500"><name x="72" y="88">parked</name></location><location id="id2" x="48" y="-40"><name x="38" y="-74">unparked</name></location><init ref="id2"/><transition><source ref="id1"/><target ref="id2"/><nail x="104" y="24"/></transition><transition><source ref="id2"/><target ref="id1"/><nail x="-8" y="24"/></transition></template><template><name>Street</name><declaration>// true = empty, false = occupied
+bool spaces[5] := {false, true, true, true, false};
+urgent chan spaceChannel[5];
+
+void flipSpace(int space)
+{
+    spaces[space] = !spaces[space];
+}</declaration><location id="id3" x="-8" y="-40"></location><init ref="id3"/><transition><source ref="id3"/><target ref="id3"/><label kind="select" x="-48" y="16">s : int</label><label kind="guard" x="-48" y="32">spaces[s]</label><label kind="synchronisation" x="-48" y="48">spaceChannel[s]?</label><label kind="assignment" x="-48" y="64">flipSpace(s)</label><nail x="-48" y="-8"/><nail x="-8" y="16"/><nail x="-8" y="16"/><nail x="24" y="-8"/></transition></template><system>// Place template instantiations here.
 CarProcess = Street();
 StreetProcess = Car();
 SensorProcess = Sensors();
@@ -59,7 +19,4 @@ SensorProcess = Sensors();
 // List one or more processes to be composed into a system.
 system CarProcess, StreetProcess, SensorProcess;
 
-</system>
-	<queries>
-	</queries>
-</nta>
+</system></nta>
