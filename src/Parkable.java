@@ -1,60 +1,69 @@
-package main;
+package src;
 
 /**
  * Interface file for the Actions file.
  */
 public interface Parkable {
+	//---------------------
 
-    void MoveForward();
+    State MoveForward();
 
     /**
      * Description:
      * This method is used to make the car move forward
      * Pre-Condition:
-     * 1. main.Car is not parked
-     * 2. main.Car isn't at the end of the street
+     * 1. Car is not parked
+     * 2. Car isn't at the end of the street
      * Post-Condition:
-     * 1. main.Car is moved forward by 1 meters
+     * 1. Car is moved forward by 1 meters
      * 2. Method returns position of the car
      * Test-Cases:
-     * 1. @Test moveForward()
+     * 1. @Test MoveForwardOnce()
+     * 2. @Test MoveForwardOutOfBounds()
+     * 3. @Test MoveForwardFromOutOfBounds()
+     * 4. @Test MoveForwardWhileParked()
+     * 
      */
 
 
 
     //---------------------
 
-    int isEmpty();
+    double[] isEmpty();
 
     /**
      * Description:
      * This method Checks is there is an empty parking space.
      * Pre-Condition:
-     * 1. main.Car is not parked
-     * 2. main.Car is moving forward
+     * 1. Car is not parked
+     * 2. Car is moving
      * Post-Condition:
-     * 1. Returns true if adjacent space is empty
+     * 1. Returns an array of sensors
      * Test-Cases:
-     * 1. @Test isEmpty()
-     * 2. Test sensor outputs
-     * 3. Test noise filtering
+     * 1. @Test isEmptySensor1()
+     * 2. @Test isEmptySensor2()
+     * 3. @Test readSensorWhileParked()
+     * 
+     * @return 
      */
 
     //---------------------
 
-    void MoveBackward();
+    State MoveBackward();
 
     /**
      * Description:
      * This method is used for moving the car backwards
      * Pre-Condition:
-     * 1. main.Car is not parked
-     * 2. main.Car is not at the beginning of the street
+     * 1. Car is not parked
+     * 2. Car is not at the beginning of the street
      * Post-Condition:
      * 1. The car gets moved 1 meter backwards
      * Test-Cases:
      * 1. @Test MoveBackward()
-     * 2.
+     * 2. @Test MoveBackwardOutOfBounds()
+     * 3. @Test MoveBackwardFromOutOfBounds()
+     * 4. @Test MoveBackwardWhileParked()
      */
 
     //---------------------
@@ -65,13 +74,17 @@ public interface Parkable {
      * Description:
      * This method is used for the car to be able to park in a free parking space
      * Pre-Condition:
-     * 1. main.Car is not parked
+     * 1. Car is not parked
      * 2. The car is positioned on the road at the beginning of a free parking space
      * Post-Condition:
      * 1. The car gets parked in a parking space
      * Test-Cases:
-     * 1. @Test park()
-     * 2.
+     * 1. @Test oneSensorDisabledPark()
+     * 2. @Test allSensorsDiabledPark()
+     * 3. @Test Park()
+     * 4. @Test ParkInFirstSpace()
+     * 5. @Test ParkWhileParked
+     * 
      */
 
     //---------------------
@@ -81,18 +94,18 @@ public interface Parkable {
     /**
      * Description:
      * This method is used for the car to be able to move out of a parkingspace
-     * 1. main.Car is parked
+     * 1. Car is parked
      * Post-Condition:
      * 1. The car gets out of the parking space
      * 2. The car gets placed in front of the parking space that the car was parked in
      * Test-Cases:
      * 1. @Test UnPark()
-     * 2.
+     * 2. @Test UnParkWhileNotParked
      */
 
     //---------------------
 
-    CarState WhereIs();
+    State WhereIs();
 
     /**
      * Description:
@@ -100,7 +113,7 @@ public interface Parkable {
      * Post-Condition:
      * 1.Method returns the position of the car
      * Test-Cases:
-     * 1. @Test Whereis()
+     * 1. @Test WhereIs()
      * 2.
      */
 

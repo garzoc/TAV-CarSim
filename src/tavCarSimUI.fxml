@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.mainWithUI">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="MoveForwardButton" layoutX="249.0" layoutY="64.0" mnemonicParsing="false" onAction="#moveForwardUIEvent" text="MoveForward" />
+            <Button fx:id="moveBckwardButton" layoutX="243.0" layoutY="118.0" mnemonicParsing="false" onAction="#moveBackwardUIEvent" text="MoveBackward" />
+            <Button fx:id="park" layoutX="185.0" layoutY="91.0" mnemonicParsing="false" onAction="#parkUIEvent" text="Park" />
+            <Button fx:id="unPark" layoutX="367.0" layoutY="91.0" mnemonicParsing="false" onAction="#unParkUIEvent" text="UnPark" />
+            <TextField fx:id="positionTextField" layoutX="217.0" layoutY="210.0" />
+            <Label fx:id="positionLabel" layoutX="274.0" layoutY="192.0" text="Position" />
+            <Label fx:id="stateLabel" layoutX="283.0" layoutY="256.0" text="State" />
+            <TextField fx:id="stateTextField" layoutX="217.0" layoutY="273.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
