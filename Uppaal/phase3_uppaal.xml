@@ -1,17 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
-</declaration><template><name>Sensors</name><location id="id0" x="0" y="0"></location><init ref="id0"/></template><template><name x="5" y="5">Car</name><declaration>// Street position
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+</declaration>
+	<template>
+		<name>Sensors</name>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="93" y="-34">queryStreet()</label>
+			<nail x="85" y="-59"/>
+			<nail x="85" y="42"/>
+		</transition>
+	</template>
+	<template>
+		<name x="5" y="5">Car</name>
+		<declaration>// Street position
 int position := 0;
 // Target parking space
-int parkingSpace = -1;
+int parkingSpace := -1;
 // Direction -- 1 is forward, -1 is backward
-int direction = 1;</declaration><location id="id1" x="48" y="96" color="#ffa500"><name x="72" y="88">parked</name></location><location id="id2" x="48" y="-40"><name x="38" y="-74">unparked</name></location><init ref="id2"/><transition><source ref="id1"/><target ref="id2"/><nail x="104" y="24"/></transition><transition><source ref="id2"/><target ref="id1"/><nail x="-8" y="24"/></transition></template><template><name>Street</name><declaration>// true = empty, false = occupied
+int direction := 1;
+//Parked State
+int parked := false;
+
+void moveForward(){
+    if(position &lt;= 5){
+        position++;
+    } 
+}
+
+void unpark(){
+    moveForward();
+}
+
+void delay(){
+    
+}</declaration>
+		<location id="id1" x="-280" y="144">
+		</location>
+		<location id="id2" x="-280" y="212">
+			<name x="-297" y="229">End</name>
+		</location>
+		<location id="id3" x="-280" y="76">
+			<label kind="testcodeExit">unpark()</label>
+		</location>
+		<location id="id4" x="-144" y="8">
+		</location>
+		<location id="id5" x="-272" y="8">
+			<name x="-323" y="-8">Park</name>
+		</location>
+		<location id="id6" x="-204" y="-59">
+			<name x="-187" y="-76">querySensors()</name>
+		</location>
+		<location id="id7" x="-204" y="-119">
+			<name x="-214" y="-153">start</name>
+		</location>
+		<location id="id8" x="238" y="102" color="#ffa500">
+			<name x="262" y="94">parked</name>
+		</location>
+		<location id="id9" x="229" y="-42">
+			<name x="219" y="-76">unparked</name>
+		</location>
+		<init ref="id7"/>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id6"/>
+			<label kind="assignment" x="-195" y="76">moveForward()</label>
+			<nail x="-102" y="68"/>
+			<nail x="-195" y="68"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id4"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="assignment" x="-442" y="136">moveForward()</label>
+			<label kind="testcode">moveForward()</label>
+			<nail x="-331" y="119"/>
+			<nail x="-331" y="187"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id1"/>
+			<label kind="assignment" x="-340" y="93">unpark()</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="-331" y="34">delay()</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id5"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<nail x="272" y="17"/>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<nail x="187" y="25"/>
+		</transition>
+	</template>
+	<template>
+		<name>Street</name>
+		<declaration>// true = empty, false = occupied
 bool spaces[5] := {false, true, true, true, false};
 urgent chan spaceChannel[5];
 
 void flipSpace(int space)
 {
     spaces[space] = !spaces[space];
-}</declaration><location id="id3" x="-8" y="-40"></location><init ref="id3"/><transition><source ref="id3"/><target ref="id3"/><label kind="select" x="-48" y="16">s : int</label><label kind="guard" x="-48" y="32">spaces[s]</label><label kind="synchronisation" x="-48" y="48">spaceChannel[s]?</label><label kind="assignment" x="-48" y="64">flipSpace(s)</label><nail x="-48" y="-8"/><nail x="-8" y="16"/><nail x="-8" y="16"/><nail x="24" y="-8"/></transition></template><system>// Place template instantiations here.
+}</declaration>
+		<location id="id10" x="-8" y="-40">
+		</location>
+		<init ref="id10"/>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id10"/>
+			<label kind="select" x="-48" y="16">s : int</label>
+			<label kind="guard" x="-48" y="32">spaces[s]</label>
+			<label kind="synchronisation" x="-48" y="48">spaceChannel[s]?</label>
+			<label kind="assignment" x="-48" y="64">flipSpace(s)</label>
+			<nail x="-48" y="-8"/>
+			<nail x="-8" y="16"/>
+			<nail x="-8" y="16"/>
+			<nail x="24" y="-8"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
 CarProcess = Street();
 StreetProcess = Car();
 SensorProcess = Sensors();
@@ -19,4 +152,7 @@ SensorProcess = Sensors();
 // List one or more processes to be composed into a system.
 system CarProcess, StreetProcess, SensorProcess;
 
-</system></nta>
+</system>
+	<queries>
+	</queries>
+</nta>
