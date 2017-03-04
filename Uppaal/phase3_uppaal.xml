@@ -2,18 +2,25 @@
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
 	<declaration>// Place global declarations here.
-</declaration>
+broadcast chan sensorChannel, noParkChannel, moveForward, moveBackward, parkChannel, car1Channel, car2Channel, cantMoveChannel;</declaration>
 	<template>
 		<name>Sensors</name>
-		<location id="id0" x="0" y="0">
+		<location id="id0" x="-17" y="153">
 		</location>
-		<init ref="id0"/>
+		<location id="id1" x="-17" y="51">
+		</location>
+		<init ref="id1"/>
 		<transition>
 			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-187" y="102">noParkChannel!</label>
+			<nail x="-76" y="110"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="assignment" x="93" y="-34">queryStreet()</label>
-			<nail x="85" y="-59"/>
-			<nail x="85" y="42"/>
+			<label kind="synchronisation" x="59" y="93">sensorChannel?</label>
+			<nail x="51" y="110"/>
 		</transition>
 	</template>
 	<template>
@@ -24,124 +31,163 @@ int position := 0;
 int parkingSpace := -1;
 // Direction -- 1 is forward, -1 is backward
 int direction := 1;
-//Parked State
-int parked := false;
 
-void moveForward(){
-    if(position &lt;= 5){
-        position++;
-    } 
-}
-
-void unpark(){
-    moveForward();
-}
-
-void delay(){
-    
-}</declaration>
-		<location id="id1" x="-280" y="144">
+clock c;
+</declaration>
+		<location id="id2" x="51" y="272">
 		</location>
-		<location id="id2" x="-280" y="212">
-			<name x="-297" y="229">End</name>
+		<location id="id3" x="17" y="178">
 		</location>
-		<location id="id3" x="-280" y="76">
-			<label kind="testcodeExit">unpark()</label>
+		<location id="id4" x="-221" y="8">
 		</location>
-		<location id="id4" x="-144" y="8">
+		<location id="id5" x="-34" y="102">
 		</location>
-		<location id="id5" x="-272" y="8">
-			<name x="-323" y="-8">Park</name>
+		<location id="id6" x="-102" y="17">
 		</location>
-		<location id="id6" x="-204" y="-59">
-			<name x="-187" y="-76">querySensors()</name>
+		<location id="id7" x="-170" y="-51">
 		</location>
-		<location id="id7" x="-204" y="-119">
-			<name x="-214" y="-153">start</name>
+		<location id="id8" x="-170" y="-178">
 		</location>
-		<location id="id8" x="238" y="102" color="#ffa500">
-			<name x="262" y="94">parked</name>
-		</location>
-		<location id="id9" x="229" y="-42">
-			<name x="219" y="-76">unparked</name>
-		</location>
-		<init ref="id7"/>
+		<init ref="id8"/>
 		<transition>
-			<source ref="id7"/>
-			<target ref="id6"/>
-		</transition>
-		<transition>
-			<source ref="id4"/>
-			<target ref="id6"/>
-			<label kind="assignment" x="-195" y="76">moveForward()</label>
-			<nail x="-102" y="68"/>
-			<nail x="-195" y="68"/>
-		</transition>
-		<transition>
-			<source ref="id6"/>
-			<target ref="id4"/>
-		</transition>
-		<transition>
-			<source ref="id1"/>
-			<target ref="id2"/>
-		</transition>
-		<transition>
-			<source ref="id1"/>
-			<target ref="id1"/>
-			<label kind="assignment" x="-442" y="136">moveForward()</label>
-			<label kind="testcode">moveForward()</label>
-			<nail x="-331" y="119"/>
-			<nail x="-331" y="187"/>
+			<source ref="id2"/>
+			<target ref="id8"/>
+			<nail x="289" y="272"/>
+			<nail x="246" y="-212"/>
+			<nail x="-153" y="-212"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
-			<target ref="id1"/>
-			<label kind="assignment" x="-340" y="93">unpark()</label>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="34" y="195">moveForward?</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="35" y="161">cantMoveChannel?</label>
+			<nail x="221" y="178"/>
+			<nail x="187" y="-178"/>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-331" y="34">delay()</label>
+			<label kind="synchronisation" x="0" y="127">moveForward!</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-297" y="-42">parkChannel?</label>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id5"/>
+			<label kind="synchronisation" x="-42" y="42">car1Channel!</label>
+			<label kind="assignment" x="-59" y="25">c := 0</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-136" y="-51">noParkChannel?</label>
 		</transition>
 		<transition>
 			<source ref="id8"/>
-			<target ref="id9"/>
-			<nail x="272" y="17"/>
-		</transition>
-		<transition>
-			<source ref="id9"/>
-			<target ref="id8"/>
-			<nail x="187" y="25"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-153" y="-127">sensorChannel!</label>
 		</transition>
 	</template>
 	<template>
 		<name>Street</name>
 		<declaration>// true = empty, false = occupied
-bool spaces[5] := {false, true, true, true, false};
-urgent chan spaceChannel[5];
+bool spaces[5] := {false, true, true, false, false};
+int cars[2] := {0,0};
+int length := 5;
+int x;
+//int x := 0;
+
+
+
+
+
+
+
+
+
+
+
 
 void flipSpace(int space)
 {
     spaces[space] = !spaces[space];
-}</declaration>
-		<location id="id10" x="-8" y="-40">
+}
+</declaration>
+		<location id="id9" x="25" y="-25">
+		</location>
+		<location id="id10" x="0" y="-289">
+		</location>
+		<location id="id11" x="34" y="127">
+		</location>
+		<location id="id12" x="119" y="-17">
+		</location>
+		<location id="id13" x="-76" y="-25">
+		</location>
+		<location id="id14" x="17" y="-178">
 		</location>
 		<init ref="id10"/>
 		<transition>
-			<source ref="id10"/>
+			<source ref="id13"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-58" y="-59">cars[x] &lt; 0</label>
+			<label kind="synchronisation" x="-25" y="-8">cantMoveChannel!</label>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id9"/>
+			<label kind="guard" x="42" y="-51">cars[x] &gt;= length</label>
+			<label kind="synchronisation" x="-25" y="-8">cantMoveChannel!</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
 			<target ref="id10"/>
-			<label kind="select" x="-48" y="16">s : int</label>
-			<label kind="guard" x="-48" y="32">spaces[s]</label>
-			<label kind="synchronisation" x="-48" y="48">spaceChannel[s]?</label>
-			<label kind="assignment" x="-48" y="64">flipSpace(s)</label>
-			<nail x="-48" y="-8"/>
-			<nail x="-8" y="16"/>
-			<nail x="-8" y="16"/>
-			<nail x="24" y="-8"/>
+			<nail x="-136" y="127"/>
+			<nail x="-238" y="127"/>
+			<nail x="-238" y="-297"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id11"/>
+			<label kind="guard" x="102" y="25">cars[x] &lt; length</label>
+			<label kind="synchronisation" x="85" y="42">moveForward!</label>
+			<label kind="assignment" x="85" y="59">cars[x]++</label>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id11"/>
+			<label kind="guard" x="-119" y="17">cars[x] &gt;= 0</label>
+			<label kind="synchronisation" x="-144" y="42">moveBackward!</label>
+			<label kind="assignment" x="-93" y="59">cars[x]--</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="76" y="-119">moveForward?</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-153" y="-119">moveBackward?</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="76" y="-263">car2Channel?</label>
+			<label kind="assignment" x="76" y="-246">x := 1</label>
+			<nail x="76" y="-229"/>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="-118" y="-255">car1Channel?</label>
+			<label kind="assignment" x="-110" y="-238">x := 0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
