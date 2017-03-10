@@ -35,9 +35,9 @@ int pos2 := 0;
 		<transition>
 			<source ref="id0"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-255" y="-280">carIsParked[index] != spaces[positions[index]]</label>
-			<label kind="synchronisation" x="-255" y="-255">changeParkState?</label>
-			<label kind="assignment" x="-255" y="-238">spaces[positions[index]] := !spaces[positions[index]],
+			<label kind="guard" x="-255" y="-246">carIsParked[index] != spaces[positions[index]]</label>
+			<label kind="synchronisation" x="-255" y="-229">changeParkState?</label>
+			<label kind="assignment" x="-255" y="-212">spaces[positions[index]] := !spaces[positions[index]],
 carIsParked[index] := !carIsParked[index]</label>
 			<nail x="-246" y="-170"/>
 			<nail x="-127" y="-170"/>
@@ -104,452 +104,340 @@ carIsParked[index] := !carIsParked[index]</label>
 		</transition>
 	</template>
 	<template>
-		<name x="5" y="5">Car</name>
-		<declaration>// Street position
-int position := 0;
-// Target parking space
-int parkingSpace := -1;
-// Direction -- 1 is forward, -1 is backward
-int direction := 1;
-
-int c;
-
-</declaration>
-		<location id="id3" x="-544" y="-484">
-		</location>
-		<location id="id4" x="-110" y="-85">
-		</location>
-		<location id="id5" x="-867" y="-440">
-		</location>
-		<location id="id6" x="-986" y="-432">
-		</location>
-		<location id="id7" x="-765" y="-432">
-		</location>
-		<location id="id8" x="-144" y="-161">
-		</location>
-		<location id="id9" x="-178" y="-255">
-		</location>
-		<location id="id10" x="-680" y="-484">
-		</location>
-		<location id="id11" x="-229" y="-331">
-		</location>
-		<location id="id12" x="-297" y="-416">
-		</location>
-		<location id="id13" x="-365" y="-484">
-		</location>
-		<location id="id14" x="-365" y="-611">
-		</location>
-		<init ref="id14"/>
-		<transition>
-			<source ref="id3"/>
-			<target ref="id10"/>
-		</transition>
-		<transition>
-			<source ref="id13"/>
-			<target ref="id3"/>
-			<label kind="synchronisation" x="-526" y="-501">canParkChannel?</label>
-			<label kind="assignment" x="-527" y="-518">c:=0</label>
-		</transition>
-		<transition>
-			<source ref="id8"/>
-			<target ref="id4"/>
-			<label kind="synchronisation" x="-127" y="-145">car1Channel!</label>
-		</transition>
-		<transition>
-			<source ref="id5"/>
-			<target ref="id6"/>
-			<label kind="synchronisation" x="-969" y="-508">moveForward!</label>
-			<nail x="-918" y="-491"/>
-		</transition>
-		<transition>
-			<source ref="id7"/>
-			<target ref="id5"/>
-			<label kind="synchronisation" x="-841" y="-508">car1Channel!</label>
-			<nail x="-807" y="-491"/>
-		</transition>
-		<transition>
-			<source ref="id6"/>
-			<target ref="id7"/>
-			<label kind="synchronisation" x="-884" y="-373">moveForward?</label>
-			<nail x="-824" y="-373"/>
-		</transition>
-		<transition>
-			<source ref="id10"/>
-			<target ref="id7"/>
-			<label kind="guard" x="-748" y="-483">c &gt; 5</label>
-		</transition>
-		<transition>
-			<source ref="id10"/>
-			<target ref="id10"/>
-			<label kind="guard" x="-680" y="-603">c &lt;= 5</label>
-			<label kind="assignment" x="-680" y="-586">c++</label>
-			<nail x="-603" y="-560"/>
-			<nail x="-714" y="-560"/>
-		</transition>
-		<transition>
-			<source ref="id9"/>
-			<target ref="id8"/>
-			<label kind="synchronisation" x="-161" y="-229">moveForward?</label>
-		</transition>
-		<transition>
-			<source ref="id9"/>
-			<target ref="id14"/>
-			<label kind="synchronisation" x="-136" y="-272">cantMoveChannel?</label>
-			<nail x="26" y="-255"/>
-			<nail x="17" y="-611"/>
-		</transition>
-		<transition>
-			<source ref="id11"/>
-			<target ref="id9"/>
-			<label kind="synchronisation" x="-203" y="-323">moveForward!</label>
-		</transition>
-		<transition>
-			<source ref="id12"/>
-			<target ref="id11"/>
-			<label kind="synchronisation" x="-254" y="-399">car1Channel!</label>
-		</transition>
-		<transition>
-			<source ref="id13"/>
-			<target ref="id12"/>
-			<label kind="synchronisation" x="-331" y="-484">noParkChannel?</label>
-		</transition>
-		<transition>
-			<source ref="id14"/>
-			<target ref="id13"/>
-			<label kind="synchronisation" x="-348" y="-560">sensorChannel!</label>
-		</transition>
-	</template>
-	<template>
 		<name>Car1</name>
 		<declaration>int c;
 </declaration>
-		<location id="id15" x="-374" y="246">
+		<location id="id3" x="-374" y="246">
 		</location>
-		<location id="id16" x="-442" y="280">
+		<location id="id4" x="-374" y="289">
 		</location>
-		<location id="id17" x="-552" y="280">
+		<location id="id5" x="-646" y="289">
 		</location>
-		<location id="id18" x="-510" y="102">
+		<location id="id6" x="-510" y="102">
 		</location>
-		<location id="id19" x="-510" y="8">
+		<location id="id7" x="-510" y="8">
+			<name x="-552" y="-25">parked</name>
 		</location>
-		<location id="id20" x="-340" y="8">
+		<location id="id8" x="-340" y="8">
 		</location>
-		<location id="id21" x="178" y="102">
+		<location id="id9" x="178" y="102">
 		</location>
-		<location id="id22" x="178" y="-76">
+		<location id="id10" x="178" y="-76">
+			<name x="168" y="-110">end</name>
 		</location>
-		<location id="id23" x="-170" y="161">
+		<location id="id11" x="-170" y="161">
 		</location>
-		<location id="id24" x="357" y="119">
+		<location id="id12" x="365" y="119">
 		</location>
-		<location id="id25" x="0" y="255">
+		<location id="id13" x="0" y="255">
 		</location>
-		<location id="id26" x="0" y="102">
+		<location id="id14" x="0" y="102">
 		</location>
-		<location id="id27" x="0" y="0">
+		<location id="id15" x="0" y="0">
 		</location>
-		<location id="id28" x="-646" y="221">
+		<location id="id16" x="-646" y="212">
 		</location>
-		<location id="id29" x="-467" y="212">
+		<location id="id17" x="-467" y="212">
 		</location>
-		<location id="id30" x="-340" y="161">
+		<location id="id18" x="-340" y="161">
 		</location>
-		<location id="id31" x="110" y="357">
+		<location id="id19" x="110" y="357">
 		</location>
-		<location id="id32" x="110" y="255">
+		<location id="id20" x="110" y="255">
 		</location>
-		<init ref="id27"/>
+		<init ref="id15"/>
 		<transition>
-			<source ref="id31"/>
-			<target ref="id24"/>
+			<source ref="id19"/>
+			<target ref="id12"/>
 			<label kind="synchronisation" x="136" y="382">moveForward?</label>
 			<nail x="110" y="382"/>
 			<nail x="365" y="382"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id29"/>
+			<source ref="id3"/>
+			<target ref="id17"/>
 			<label kind="synchronisation" x="-425" y="212">car1Channel!</label>
 		</transition>
 		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-365" y="263">changeCarOnStreet?</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-612" y="297">changeCarOnStreet!</label>
+		</transition>
+		<transition>
 			<source ref="id16"/>
-			<target ref="id15"/>
-			<label kind="synchronisation" x="-408" y="263">changeCarOnStreet?</label>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-748" y="238">moveForward?</label>
 		</transition>
 		<transition>
-			<source ref="id17"/>
-			<target ref="id16"/>
-			<label kind="synchronisation" x="-569" y="297">changeCarOnStreet!</label>
-		</transition>
-		<transition>
-			<source ref="id28"/>
-			<target ref="id17"/>
-			<label kind="synchronisation" x="-688" y="255">moveForward?</label>
-		</transition>
-		<transition>
-			<source ref="id22"/>
-			<target ref="id21"/>
+			<source ref="id10"/>
+			<target ref="id9"/>
 			<label kind="synchronisation" x="187" y="0">changeCarOnStreet?</label>
 		</transition>
 		<transition>
-			<source ref="id18"/>
-			<target ref="id30"/>
+			<source ref="id6"/>
+			<target ref="id18"/>
 			<label kind="synchronisation" x="-476" y="102">car1Channel!</label>
 			<nail x="-365" y="102"/>
 		</transition>
 		<transition>
-			<source ref="id19"/>
-			<target ref="id18"/>
+			<source ref="id7"/>
+			<target ref="id6"/>
 			<label kind="synchronisation" x="-654" y="34">changeCarOnStreet?</label>
 		</transition>
 		<transition>
-			<source ref="id20"/>
-			<target ref="id19"/>
+			<source ref="id8"/>
+			<target ref="id7"/>
 			<label kind="synchronisation" x="-476" y="-25">changeCarOnStreet!</label>
 		</transition>
 		<transition>
-			<source ref="id30"/>
-			<target ref="id20"/>
+			<source ref="id18"/>
+			<target ref="id8"/>
 			<label kind="guard" x="-331" y="51">c &lt;= 3</label>
 			<label kind="assignment" x="-331" y="68">c++</label>
 		</transition>
 		<transition>
-			<source ref="id21"/>
-			<target ref="id26"/>
+			<source ref="id9"/>
+			<target ref="id14"/>
 			<label kind="synchronisation" x="59" y="85">car1Channel!</label>
 		</transition>
 		<transition>
-			<source ref="id24"/>
-			<target ref="id22"/>
+			<source ref="id12"/>
+			<target ref="id10"/>
 			<label kind="synchronisation" x="212" y="-93">changeCarOnStreet!</label>
 			<nail x="416" y="119"/>
 			<nail x="416" y="-76"/>
 		</transition>
 		<transition>
-			<source ref="id28"/>
-			<target ref="id27"/>
+			<source ref="id16"/>
+			<target ref="id15"/>
 			<label kind="synchronisation" x="-569" y="-68">cantMoveChannel?</label>
-			<nail x="-671" y="221"/>
+			<nail x="-671" y="212"/>
 			<nail x="-671" y="-51"/>
 			<nail x="0" y="-51"/>
 		</transition>
 		<transition>
-			<source ref="id23"/>
-			<target ref="id30"/>
+			<source ref="id11"/>
+			<target ref="id18"/>
 			<label kind="synchronisation" x="-314" y="136">changeParkState!</label>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id23"/>
+			<source ref="id13"/>
+			<target ref="id11"/>
 			<label kind="synchronisation" x="-161" y="263">canParkChannel?</label>
 			<label kind="assignment" x="-161" y="280">c:=0</label>
 			<nail x="-170" y="255"/>
 		</transition>
 		<transition>
-			<source ref="id31"/>
-			<target ref="id24"/>
+			<source ref="id19"/>
+			<target ref="id12"/>
 			<label kind="synchronisation" x="136" y="340">cantMoveChannel?</label>
 			<nail x="297" y="357"/>
 			<nail x="297" y="119"/>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id32"/>
+			<source ref="id13"/>
+			<target ref="id20"/>
 			<label kind="synchronisation" x="17" y="221">noParkChannel?</label>
 		</transition>
 		<transition>
-			<source ref="id29"/>
-			<target ref="id28"/>
-			<label kind="synchronisation" x="-620" y="127">moveForward!</label>
-			<nail x="-560" y="161"/>
+			<source ref="id17"/>
+			<target ref="id16"/>
+			<label kind="synchronisation" x="-603" y="187">moveForward!</label>
+			<nail x="-552" y="212"/>
 		</transition>
 		<transition>
-			<source ref="id26"/>
-			<target ref="id25"/>
+			<source ref="id14"/>
+			<target ref="id13"/>
 			<label kind="synchronisation" x="8" y="136">sensorChannel!</label>
 		</transition>
 		<transition>
-			<source ref="id27"/>
-			<target ref="id26"/>
-			<label kind="synchronisation" x="0" y="17">car1Channel!</label>
+			<source ref="id15"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="8" y="17">car1Channel!</label>
 		</transition>
 		<transition>
-			<source ref="id30"/>
-			<target ref="id29"/>
+			<source ref="id18"/>
+			<target ref="id17"/>
 			<label kind="guard" x="-441" y="161">c &gt; 3</label>
 			<label kind="synchronisation" x="-484" y="144">changeParkState!</label>
 		</transition>
 		<transition>
-			<source ref="id32"/>
-			<target ref="id31"/>
+			<source ref="id20"/>
+			<target ref="id19"/>
 			<label kind="synchronisation" x="119" y="297">moveForward!</label>
 		</transition>
 	</template>
 	<template>
 		<name>Car2</name>
 		<declaration>int c;</declaration>
-		<location id="id33" x="110" y="323">
+		<location id="id21" x="110" y="323">
 		</location>
-		<location id="id34" x="365" y="119">
+		<location id="id22" x="365" y="119">
 		</location>
-		<location id="id35" x="-374" y="221">
+		<location id="id23" x="-374" y="221">
 		</location>
-		<location id="id36" x="-561" y="221">
+		<location id="id24" x="-561" y="221">
 		</location>
-		<location id="id37" x="-374" y="280">
+		<location id="id25" x="-374" y="280">
 		</location>
-		<location id="id38" x="-552" y="280">
+		<location id="id26" x="-552" y="280">
 		</location>
-		<location id="id39" x="-680" y="221">
+		<location id="id27" x="-680" y="221">
 		</location>
-		<location id="id40" x="178" y="-51">
+		<location id="id28" x="178" y="-51">
+			<name x="168" y="-85">end</name>
 		</location>
-		<location id="id41" x="178" y="68">
+		<location id="id29" x="178" y="68">
 		</location>
-		<location id="id42" x="-544" y="110">
+		<location id="id30" x="-544" y="110">
 		</location>
-		<location id="id43" x="-348" y="161">
+		<location id="id31" x="-348" y="161">
+			<name x="-348" y="178">parked</name>
 		</location>
-		<location id="id44" x="-544" y="8">
+		<location id="id32" x="-544" y="8">
 		</location>
-		<location id="id45" x="-348" y="8">
+		<location id="id33" x="-348" y="8">
 		</location>
-		<location id="id46" x="0" y="68">
+		<location id="id34" x="0" y="68">
 		</location>
-		<location id="id47" x="25" y="-51">
+		<location id="id35" x="25" y="-51">
 		</location>
-		<location id="id48" x="-170" y="161">
+		<location id="id36" x="-170" y="161">
 		</location>
-		<location id="id49" x="0" y="161">
+		<location id="id37" x="0" y="161">
 		</location>
-		<location id="id50" x="0" y="323">
+		<location id="id38" x="0" y="323">
 		</location>
-		<init ref="id47"/>
+		<init ref="id35"/>
 		<transition>
-			<source ref="id47"/>
-			<target ref="id40"/>
+			<source ref="id35"/>
+			<target ref="id28"/>
 		</transition>
 		<transition>
-			<source ref="id33"/>
-			<target ref="id34"/>
+			<source ref="id21"/>
+			<target ref="id22"/>
 			<label kind="synchronisation" x="136" y="365">moveForward?</label>
 			<nail x="110" y="382"/>
 			<nail x="365" y="382"/>
 		</transition>
 		<transition>
-			<source ref="id35"/>
-			<target ref="id36"/>
+			<source ref="id23"/>
+			<target ref="id24"/>
 			<label kind="synchronisation" x="-484" y="204">car2Channel!</label>
 		</transition>
 		<transition>
-			<source ref="id37"/>
-			<target ref="id35"/>
+			<source ref="id25"/>
+			<target ref="id23"/>
 			<label kind="synchronisation" x="-365" y="246">changeCarOnStreet?</label>
 		</transition>
 		<transition>
-			<source ref="id38"/>
-			<target ref="id37"/>
+			<source ref="id26"/>
+			<target ref="id25"/>
 			<label kind="synchronisation" x="-535" y="280">changeCarOnStreet!</label>
 		</transition>
 		<transition>
-			<source ref="id39"/>
-			<target ref="id38"/>
+			<source ref="id27"/>
+			<target ref="id26"/>
 			<label kind="synchronisation" x="-697" y="280">moveForward?</label>
 			<nail x="-680" y="280"/>
 		</transition>
 		<transition>
-			<source ref="id40"/>
-			<target ref="id41"/>
+			<source ref="id28"/>
+			<target ref="id29"/>
 			<label kind="synchronisation" x="187" y="0">changeCarOnStreet?</label>
 		</transition>
 		<transition>
-			<source ref="id42"/>
-			<target ref="id43"/>
+			<source ref="id30"/>
+			<target ref="id31"/>
 			<label kind="synchronisation" x="-493" y="110">car2Channel!</label>
 			<nail x="-374" y="110"/>
 		</transition>
 		<transition>
-			<source ref="id44"/>
-			<target ref="id42"/>
+			<source ref="id32"/>
+			<target ref="id30"/>
 			<label kind="synchronisation" x="-688" y="42">changeCarOnStreet?</label>
 		</transition>
 		<transition>
-			<source ref="id45"/>
-			<target ref="id44"/>
+			<source ref="id33"/>
+			<target ref="id32"/>
 			<label kind="synchronisation" x="-501" y="-17">changeCarOnStreet!</label>
 		</transition>
 		<transition>
-			<source ref="id43"/>
-			<target ref="id45"/>
-			<label kind="guard" x="-340" y="85">c &lt;= 3</label>
+			<source ref="id31"/>
+			<target ref="id33"/>
+			<label kind="guard" x="-340" y="85">c &lt;= 5</label>
 			<label kind="assignment" x="-340" y="102">c++</label>
 		</transition>
 		<transition>
-			<source ref="id41"/>
-			<target ref="id46"/>
+			<source ref="id29"/>
+			<target ref="id34"/>
 			<label kind="synchronisation" x="42" y="68">car2Channel!</label>
 		</transition>
 		<transition>
-			<source ref="id34"/>
-			<target ref="id40"/>
+			<source ref="id22"/>
+			<target ref="id28"/>
 			<label kind="synchronisation" x="229" y="-76">changeCarOnStreet!</label>
 			<nail x="416" y="119"/>
 			<nail x="416" y="-51"/>
 		</transition>
 		<transition>
-			<source ref="id39"/>
-			<target ref="id47"/>
+			<source ref="id27"/>
+			<target ref="id35"/>
 			<label kind="synchronisation" x="-569" y="-68">cantMoveChannel?</label>
 			<nail x="-705" y="221"/>
 			<nail x="-705" y="-51"/>
 			<nail x="0" y="-51"/>
 		</transition>
 		<transition>
-			<source ref="id48"/>
-			<target ref="id43"/>
+			<source ref="id36"/>
+			<target ref="id31"/>
 			<label kind="synchronisation" x="-314" y="136">changeParkState!</label>
 		</transition>
 		<transition>
-			<source ref="id49"/>
-			<target ref="id48"/>
+			<source ref="id37"/>
+			<target ref="id36"/>
 			<label kind="synchronisation" x="-144" y="144">canParkChannel?</label>
 			<label kind="assignment" x="-144" y="127">c:=0</label>
 		</transition>
 		<transition>
-			<source ref="id33"/>
-			<target ref="id34"/>
+			<source ref="id21"/>
+			<target ref="id22"/>
 			<label kind="synchronisation" x="144" y="306">cantMoveChannel?</label>
 			<nail x="297" y="323"/>
 			<nail x="297" y="119"/>
 		</transition>
 		<transition>
-			<source ref="id49"/>
-			<target ref="id50"/>
+			<source ref="id37"/>
+			<target ref="id38"/>
 			<label kind="synchronisation" x="17" y="229">noParkChannel?</label>
 		</transition>
 		<transition>
-			<source ref="id36"/>
-			<target ref="id39"/>
+			<source ref="id24"/>
+			<target ref="id27"/>
 			<label kind="synchronisation" x="-663" y="178">moveForward!</label>
 			<nail x="-620" y="195"/>
 		</transition>
 		<transition>
-			<source ref="id46"/>
-			<target ref="id49"/>
+			<source ref="id34"/>
+			<target ref="id37"/>
 			<label kind="synchronisation" x="8" y="102">sensorChannel!</label>
 		</transition>
 		<transition>
-			<source ref="id43"/>
-			<target ref="id36"/>
-			<label kind="guard" x="-518" y="144">c &gt; 3</label>
+			<source ref="id31"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-518" y="144">c &gt; 5</label>
 			<label kind="synchronisation" x="-518" y="161">changeParkState!</label>
 			<nail x="-348" y="178"/>
 			<nail x="-561" y="178"/>
 		</transition>
 		<transition>
-			<source ref="id50"/>
-			<target ref="id33"/>
+			<source ref="id38"/>
+			<target ref="id21"/>
 			<label kind="synchronisation" x="8" y="289">moveForward!</label>
 		</transition>
 	</template>
@@ -579,66 +467,67 @@ bool carIsParked[2] := {false, false};
 //    spaces[space] = !spaces[space];
 //}
 </declaration>
-		<location id="id51" x="-153" y="102">
+		<location id="id39" x="-153" y="102">
+			<name x="-127" y="93">hej</name>
 		</location>
-		<location id="id52" x="348" y="102">
+		<location id="id40" x="348" y="102">
 		</location>
-		<location id="id53" x="0" y="-289">
+		<location id="id41" x="0" y="-289">
 		</location>
-		<location id="id54" x="348" y="-25">
+		<location id="id42" x="348" y="-25">
 		</location>
-		<location id="id55" x="-153" y="-25">
+		<location id="id43" x="-153" y="-25">
 		</location>
-		<location id="id56" x="17" y="-178">
+		<location id="id44" x="17" y="-178">
 		</location>
-		<init ref="id53"/>
+		<init ref="id41"/>
 		<transition>
-			<source ref="id55"/>
-			<target ref="id56"/>
+			<source ref="id43"/>
+			<target ref="id44"/>
 			<label kind="guard" x="-102" y="-25">cars[x] &lt; 0</label>
 			<label kind="synchronisation" x="-136" y="-8">cantMoveChannel!</label>
 			<nail x="42" y="-25"/>
 		</transition>
 		<transition>
-			<source ref="id54"/>
-			<target ref="id56"/>
+			<source ref="id42"/>
+			<target ref="id44"/>
 			<label kind="guard" x="25" y="-17">cars[x] &gt;= length-1 || carIsParked[x] == true</label>
 			<label kind="synchronisation" x="127" y="0">cantMoveChannel!</label>
 			<nail x="68" y="-25"/>
 		</transition>
 		<transition>
-			<source ref="id51"/>
-			<target ref="id56"/>
-			<label kind="synchronisation" x="-263" y="102">moveBackward!</label>
+			<source ref="id39"/>
+			<target ref="id44"/>
+			<label kind="synchronisation" x="-280" y="102">moveBackward!</label>
 			<nail x="-340" y="102"/>
 			<nail x="-340" y="-153"/>
 			<nail x="-42" y="-153"/>
 		</transition>
 		<transition>
-			<source ref="id55"/>
-			<target ref="id51"/>
+			<source ref="id43"/>
+			<target ref="id39"/>
 			<label kind="guard" x="-246" y="0">cars[x] &gt;= 0</label>
 			<label kind="synchronisation" x="-263" y="17">decramentPos!</label>
 			<label kind="assignment" x="-229" y="34">cars[x]--</label>
 		</transition>
 		<transition>
-			<source ref="id52"/>
-			<target ref="id56"/>
+			<source ref="id40"/>
+			<target ref="id44"/>
 			<label kind="synchronisation" x="272" y="-229">moveForward!</label>
 			<nail x="731" y="102"/>
 			<nail x="731" y="-212"/>
 			<nail x="68" y="-212"/>
 		</transition>
 		<transition>
-			<source ref="id54"/>
-			<target ref="id52"/>
+			<source ref="id42"/>
+			<target ref="id40"/>
 			<label kind="guard" x="357" y="17">cars[x] &lt; length-1 &amp;&amp; carIsParked[x] == false</label>
 			<label kind="synchronisation" x="357" y="34">incramentPos!</label>
 			<label kind="assignment" x="357" y="51">cars[x]++</label>
 		</transition>
 		<transition>
-			<source ref="id56"/>
-			<target ref="id56"/>
+			<source ref="id44"/>
+			<target ref="id44"/>
 			<label kind="synchronisation" x="459" y="-42">changeParkState?</label>
 			<label kind="assignment" x="374" y="-25">carIsParked[x] := !carIsParked[x]</label>
 			<nail x="85" y="-170"/>
@@ -649,34 +538,34 @@ bool carIsParked[2] := {false, false};
 			<nail x="85" y="-153"/>
 		</transition>
 		<transition>
-			<source ref="id56"/>
-			<target ref="id53"/>
+			<source ref="id44"/>
+			<target ref="id41"/>
 			<label kind="synchronisation" x="-161" y="-314">changeCarOnStreet?</label>
 			<nail x="-195" y="-178"/>
 			<nail x="-195" y="-289"/>
 		</transition>
 		<transition>
-			<source ref="id56"/>
-			<target ref="id54"/>
+			<source ref="id44"/>
+			<target ref="id42"/>
 			<label kind="synchronisation" x="153" y="-127">moveForward?</label>
 			<nail x="76" y="-119"/>
 			<nail x="340" y="-76"/>
 		</transition>
 		<transition>
-			<source ref="id56"/>
-			<target ref="id55"/>
+			<source ref="id44"/>
+			<target ref="id43"/>
 			<label kind="synchronisation" x="-170" y="-127">moveBackward?</label>
 		</transition>
 		<transition>
-			<source ref="id53"/>
-			<target ref="id56"/>
+			<source ref="id41"/>
+			<target ref="id44"/>
 			<label kind="synchronisation" x="17" y="-289">car2Channel?</label>
 			<label kind="assignment" x="17" y="-272">x := 1</label>
 			<nail x="17" y="-255"/>
 		</transition>
 		<transition>
-			<source ref="id53"/>
-			<target ref="id56"/>
+			<source ref="id41"/>
+			<target ref="id44"/>
 			<label kind="synchronisation" x="-119" y="-255">car1Channel?</label>
 			<label kind="assignment" x="-76" y="-238">x := 0</label>
 			<nail x="-25" y="-238"/>
@@ -695,5 +584,11 @@ system car1Process, car2Process, StreetProcess, SensorProcess;
 
 </system>
 	<queries>
+		<query>
+			<formula>E&lt;&gt;(car1Process.parked and car2Process.parked)
+			</formula>
+			<comment>
+			</comment>
+		</query>
 	</queries>
 </nta>
