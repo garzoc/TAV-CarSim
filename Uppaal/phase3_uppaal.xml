@@ -134,6 +134,7 @@ carIsParked[index] := !carIsParked[index]</label>
 		<location id="id14" x="0" y="102">
 		</location>
 		<location id="id15" x="0" y="0">
+			<name x="17" y="-25">start</name>
 		</location>
 		<location id="id16" x="-646" y="212">
 		</location>
@@ -259,7 +260,7 @@ carIsParked[index] := !carIsParked[index]</label>
 		<transition>
 			<source ref="id15"/>
 			<target ref="id14"/>
-			<label kind="synchronisation" x="8" y="17">car1Channel!</label>
+			<label kind="synchronisation" x="8" y="34">car1Channel!</label>
 		</transition>
 		<transition>
 			<source ref="id18"/>
@@ -586,19 +587,25 @@ system car1Process, car2Process, StreetProcess, SensorProcess;
 </system>
 	<queries>
 		<query>
-			<formula>car1Process.parked --&gt; not(car1Process.unparked)
+			<formula>A[](car1Process.unparked imply car1Process.c&gt;3)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; (car1Process.parked and car2Process.parked)
+			<formula>A[] (car1Process.parked and car1Process.c&gt;5) imply(car1Process.unparked)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>A&lt;&gt; car1Process.unparked
+			<formula>A[] (car1Process.parked and car2Process.parked) and streetProcess[]
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] car1Process.parked imply car1Process.unparked and
 			</formula>
 			<comment>
 			</comment>

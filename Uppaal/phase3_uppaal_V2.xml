@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+broadcast chan parkChannel1, parkChannel2,unParkChannel1, unParkChannel2; </declaration>
+	<template>
+		<name x="5" y="5">street1</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-119" y="-85">
+			<name x="-129" y="-119">parked</name>
+		</location>
+		<location id="id1" x="-246" y="0">
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-212" y="34">unParkChannel1?</label>
+			<nail x="-119" y="25"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-280" y="-68">parkChannel1?</label>
+		</transition>
+	</template>
+	<template>
+		<name>street2</name>
+		<location id="id2" x="-178" y="-102">
+			<name x="-188" y="-136">parked</name>
+		</location>
+		<location id="id3" x="-306" y="-8">
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-272" y="8">unParkChannel2?</label>
+			<nail x="-178" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-331" y="-85">parkChannel2?</label>
+		</transition>
+	</template>
+	<template>
+		<name>cars</name>
+		<declaration>int x :=0;
+</declaration>
+		<location id="id4" x="-229" y="-42">
+		</location>
+		<location id="id5" x="-297" y="-144">
+		</location>
+		<location id="id6" x="-391" y="0">
+		</location>
+		<init ref="id6"/>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-289" y="42">unParkChannel2!</label>
+			<nail x="-229" y="42"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-459" y="-170">unParkChannel1!</label>
+			<nail x="-467" y="-153"/>
+			<nail x="-416" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-331" y="-51">x==4</label>
+			<label kind="synchronisation" x="-340" y="-17">parkChannel2!</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-391" y="-93">x==2</label>
+			<label kind="synchronisation" x="-433" y="-110">parkChannel1!</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-425" y="93">x&gt;0</label>
+			<label kind="assignment" x="-424" y="76">x--</label>
+			<nail x="-442" y="76"/>
+			<nail x="-314" y="76"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-510" y="-34">x&lt;5</label>
+			<label kind="assignment" x="-510" y="-17">x++</label>
+			<nail x="-467" y="-68"/>
+			<nail x="-467" y="68"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+car1Process = cars();
+car2Process = cars();
+street1Process = street1();
+street2Process = street2();
+// List one or more processes to be composed into a system.
+system car1Process, car2Process, street1Process, street2Process;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not(car1Process.x&gt;5 and car1Process.x&lt;0) or (car2Process.x&gt;5 and car2Process.x&lt;0)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>(street1Process.parked and street2Process.parked) --&gt; (car1Process.x!=car2Process.x)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
