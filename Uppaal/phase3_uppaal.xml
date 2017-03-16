@@ -138,6 +138,7 @@ carIsParked[index] := !carIsParked[index]</label>
 		<location id="id16" x="-646" y="212">
 		</location>
 		<location id="id17" x="-467" y="212">
+			<name x="-527" y="221">unparked</name>
 		</location>
 		<location id="id18" x="-340" y="161">
 		</location>
@@ -585,7 +586,25 @@ system car1Process, car2Process, StreetProcess, SensorProcess;
 </system>
 	<queries>
 		<query>
-			<formula>E&lt;&gt;(car1Process.parked and car2Process.parked)
+			<formula>car1Process.parked --&gt; not(car1Process.unparked)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (car1Process.parked and car2Process.parked)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; car1Process.unparked
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (car1Process.end and car2Process.end)
 			</formula>
 			<comment>
 			</comment>
