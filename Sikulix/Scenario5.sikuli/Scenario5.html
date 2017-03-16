@@ -70,11 +70,23 @@
 <h2>Scenario5.sikuli</h2> <a href="Scenario5.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">from</span> Setup <span class="kw">import</span> *
+<span class="cmt">#///// Setup /////</span>
+
+mainWindow = <span class="skw">find</span>(<img src="1488896415916-1.png" />)
+textField = mainWindow.<span class="skw">find</span>(<img src="1488897568769-1.png" />)
+forward = <span class="skw">find</span>(<img src="forward-1.png" />)
+backward = <span class="skw">find</span>(<img src="backward-1.png" />)
+park = <span class="skw">find</span>(<img src="park-1.png" />)
+unpark = <span class="skw">find</span>(<img src="unpark-1.png" />)
+
 
 <span class="cmt">#///// Scenario 5 /////</span>
-<span class="cmt"># Car parks in first available parking spot, unparks, and parks in the next available parking spot.</span>
+<span class="cmt"># Car tries to move out of bounds but stops at 0</span>
 
+<span class="skw">click</span>(backward)
+
+<span class="kw">if</span>(<span class="kw">not</span> textField.exists(<img src="1489658271345.png" />)):
+    <span class="kw">print</span>(<span class="str">"Failed scenario 5"</span>)
 </pre>
 </body>
 </html>

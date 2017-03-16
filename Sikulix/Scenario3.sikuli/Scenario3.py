@@ -1,10 +1,23 @@
-from Scenario1 import *
-from Scenario2 import *
+#///// Setup /////
+
+    
+mainWindow = find("1488896415916.png")
+textField = mainWindow.find("1488897568769.png")
+forward = find("forward.png")
+backward = find("backward.png")
+park = find("park.png")
+unpark = find("unpark.png")
 
 #///// Scenario 3 /////
-# Car moves to the end of the street, then back to the start, and parks
+# Car parks in first parking space, unparks, moves back, and parks in the same space
+click(park)
+val = capture(textField)
+click(unpark)
+for x in range(0, 6):
+    click(backward)
 
+click(park)
 
-# Runs Scenario 1 and 2 in sequence
-# May be revised to do something more interesting
-
+if(not textField.exists(val).getScore() > 0.98):
+    print("Failed Scenario 2")
+    

@@ -70,16 +70,28 @@
 <h2>Scenario3.sikuli</h2> <a href="Scenario3.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">from</span> Scenario1 <span class="kw">import</span> *
-<span class="kw">from</span> Scenario2 <span class="kw">import</span> *
+<span class="cmt">#///// Setup /////</span>
+
+
+mainWindow = <span class="skw">find</span>(<img src="1488896415916.png" />)
+textField = mainWindow.<span class="skw">find</span>(<img src="1488897568769.png" />)
+forward = <span class="skw">find</span>(<img src="forward.png" />)
+backward = <span class="skw">find</span>(<img src="backward.png" />)
+park = <span class="skw">find</span>(<img src="park.png" />)
+unpark = <span class="skw">find</span>(<img src="unpark.png" />)
 
 <span class="cmt">#///// Scenario 3 /////</span>
-<span class="cmt"># Car moves to the end of the street, then back to the start, and parks</span>
+<span class="cmt"># Car parks in first parking space, unparks, moves back, and parks in the same space</span>
+<span class="skw">click</span>(park)
+val = <span class="skw">capture</span>(textField)
+<span class="skw">click</span>(unpark)
+<span class="kw">for</span> x <span class="kw">in</span> range(<span class="dig">0</span>, <span class="dig">6</span>):
+    <span class="skw">click</span>(backward)
 
+<span class="skw">click</span>(park)
 
-<span class="cmt"># Runs Scenario 1 and 2 in sequence</span>
-<span class="cmt"># May be revised to do something more interesting</span>
-
+<span class="kw">if</span>(<span class="kw">not</span> textField.exists(val).getScore() &gt; <span class="dig">0.98</span>):
+    <span class="kw">print</span>(<span class="str">"Failed Scenario 2"</span>)
 </pre>
 </body>
 </html>

@@ -23,11 +23,8 @@ import java.util.logging.Logger;
 public class mainWithUI extends Application{
 
     //Setups
-    Sensor[] sensors = {new Ultrasonic(),new Ultrasonic()};
-    Car car = new Car(0, false, sensors, new CarEngine());
-    State state = new State(0,false);
-
-
+    static Sensor[] sensors;
+    static Car car;
 
     public static void main(String[] args){
         Application.launch(src.mainWithUI.class, (java.lang.String[])null);
@@ -37,21 +34,24 @@ public class mainWithUI extends Application{
     //Start the UI
     @Override
     public void start(Stage primaryStage) {
+    	sensors = new Sensor[] {new Ultrasonic(),new Ultrasonic()};
+    	car = new Car(0, false, sensors, new CarEngine());
+        generateAMap();
         try {
             AnchorPane Mainpage = (AnchorPane) FXMLLoader.load(src.mainWithUI.class.getResource("tavCarSimUI.fxml"));
             Scene scene = new Scene(Mainpage);
             primaryStage.setScene(scene);
             primaryStage.setTitle("TAV Car SIM");
             primaryStage.show();
-            generateAMap();
         } catch (Exception ex) {
             Logger.getLogger(src.mainWithUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     //Generate a map from .txt file
     public void generateAMap(){
-        double[] map=read("src/map/MAP.txt");
+        double[] map=read("map/MAP.txt");
         car.generateMap(map);
     }
 
@@ -93,60 +93,31 @@ public class mainWithUI extends Application{
 
     //Event for when moveForward button is pressed
     public void moveForwardUIEvent(){
-        if(!state.isParked) {
-            state = car.MoveForward();
-        }
-        if(state.isParked){
-            stateTextField.setText("Parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }else{
-            stateTextField.setText("Not parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }
+        car.MoveForward();
+        refreshUI();
     }
 
     //Event for when moveBackward button is pressed
     public void moveBackwardUIEvent(){
-        if(!state.isParked) {
-           state = car.MoveBackward();
-        }
-        if(state.isParked){
-            stateTextField.setText("Parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }else{
-            stateTextField.setText("Not parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }
+       car.MoveBackward();
+       refreshUI();
     }
 
     //Event for when park button is pressed
     public void parkUIEvent(){
-        if(!state.isParked) {
-            car.Park();
-            state.isParked=true;
-        }
-        if(state.isParked){
-            stateTextField.setText("Parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }else{
-            stateTextField.setText("Not parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }
+        car.Park();
+        refreshUI();
     }
 
     //Event for when unPark button is pressed
     public void unParkUIEvent(){
-        if(state.isParked) {
-            car.UnPark();
-            state.isParked = false;
-        }
-        if(state.isParked){
-            stateTextField.setText("Parked");
-            positionTextField.setText(Integer.toString(state.position));
-
-        }else{
-            stateTextField.setText("Not parked");
-            positionTextField.setText(Integer.toString(state.position));
-        }
+        car.UnPark();
+        refreshUI();
+    }
+    
+    void refreshUI()
+    {
+        stateTextField.setText(car.WhereIs().isParked ? "Parked" : "Not parked");
+        positionTextField.setText(Integer.toString(car.WhereIs().position));
     }
 }

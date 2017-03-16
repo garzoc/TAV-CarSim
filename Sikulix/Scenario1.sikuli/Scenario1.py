@@ -1,4 +1,13 @@
-from Setup import *
+
+#///// Setup /////
+
+    
+mainWindow = find("1488896415916.png")
+textField = mainWindow.find("1488897568769.png")
+forward = find("forward.png")
+backward = find("backward.png")
+park = find("park.png")
+unpark = find("unpark.png")
 
 #///// Scenario 1 /////
 # Car moves to end of the street, then moves back to the start.

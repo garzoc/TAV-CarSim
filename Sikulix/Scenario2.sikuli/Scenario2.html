@@ -72,11 +72,23 @@
 <pre class="sikuli-code">
 <span class="kw">from</span> Setup <span class="kw">import</span> *
 
+<span class="cmt">#///// Setup /////</span>
+
+
+mainWindow = <span class="skw">find</span>(<img src="1488896415916.png" />)
+textField = mainWindow.<span class="skw">find</span>(<img src="1488897568769.png" />)
+forward = <span class="skw">find</span>(<img src="forward.png" />)
+backward = <span class="skw">find</span>(<img src="backward.png" />)
+park = <span class="skw">find</span>(<img src="park.png" />)
+unpark = <span class="skw">find</span>(<img src="unpark.png" />)
+
 <span class="cmt">#///// Scenario 2 /////</span>
 <span class="cmt"># Car parks in first available parking spot.</span>
+<span class="cmt"># Assumes at least one parking spot is available</span>
+<span class="skw">click</span>(park)
 
-<span class="cmt"># Parking does not seem to work correctly at the moment</span>
-
+<span class="kw">if</span>(<span class="kw">not</span> textField.exists(<img src="1489656736180.png" />)):
+    <span class="kw">print</span>(<span class="str">"Failed Scenario 2"</span>)
 </pre>
 </body>
 </html>
