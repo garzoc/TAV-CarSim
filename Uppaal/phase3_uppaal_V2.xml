@@ -15,8 +15,8 @@ broadcast chan parkChannel1, parkChannel2,unParkChannel1, unParkChannel2; </decl
 		<transition>
 			<source ref="id0"/>
 			<target ref="id1"/>
-			<label kind="synchronisation" x="-212" y="34">unParkChannel1?</label>
-			<nail x="-119" y="25"/>
+			<label kind="synchronisation" x="-221" y="0">unParkChannel1?</label>
+			<nail x="-119" y="0"/>
 		</transition>
 		<transition>
 			<source ref="id1"/>
@@ -35,8 +35,8 @@ broadcast chan parkChannel1, parkChannel2,unParkChannel1, unParkChannel2; </decl
 		<transition>
 			<source ref="id2"/>
 			<target ref="id3"/>
-			<label kind="synchronisation" x="-272" y="8">unParkChannel2?</label>
-			<nail x="-178" y="0"/>
+			<label kind="synchronisation" x="-263" y="0">unParkChannel2?</label>
+			<nail x="-178" y="-8"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
@@ -48,9 +48,9 @@ broadcast chan parkChannel1, parkChannel2,unParkChannel1, unParkChannel2; </decl
 		<name>cars</name>
 		<declaration>int x :=0;
 </declaration>
-		<location id="id4" x="-229" y="-42">
+		<location id="id4" x="-195" y="0">
 		</location>
-		<location id="id5" x="-297" y="-144">
+		<location id="id5" x="-297" y="-153">
 		</location>
 		<location id="id6" x="-391" y="0">
 		</location>
@@ -58,42 +58,44 @@ broadcast chan parkChannel1, parkChannel2,unParkChannel1, unParkChannel2; </decl
 		<transition>
 			<source ref="id4"/>
 			<target ref="id6"/>
-			<label kind="synchronisation" x="-289" y="42">unParkChannel2!</label>
-			<nail x="-229" y="42"/>
+			<label kind="synchronisation" x="-331" y="119">unParkChannel2!</label>
+			<nail x="-195" y="119"/>
+			<nail x="-340" y="119"/>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id6"/>
-			<label kind="synchronisation" x="-459" y="-170">unParkChannel1!</label>
+			<label kind="synchronisation" x="-450" y="-170">unParkChannel1!</label>
 			<nail x="-467" y="-153"/>
-			<nail x="-416" y="-51"/>
+			<nail x="-467" y="-42"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-331" y="-51">x==4</label>
-			<label kind="synchronisation" x="-340" y="-17">parkChannel2!</label>
+			<label kind="guard" x="-314" y="17">x==4</label>
+			<label kind="synchronisation" x="-340" y="0">parkChannel2!</label>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-391" y="-93">x==2</label>
-			<label kind="synchronisation" x="-433" y="-110">parkChannel1!</label>
+			<label kind="guard" x="-297" y="-102">x==2</label>
+			<label kind="synchronisation" x="-297" y="-127">parkChannel1!</label>
+			<nail x="-297" y="-68"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id6"/>
-			<label kind="guard" x="-425" y="93">x&gt;0</label>
-			<label kind="assignment" x="-424" y="76">x--</label>
-			<nail x="-442" y="76"/>
-			<nail x="-314" y="76"/>
+			<label kind="guard" x="-442" y="93">x&gt;0</label>
+			<label kind="assignment" x="-441" y="76">x--</label>
+			<nail x="-459" y="76"/>
+			<nail x="-391" y="76"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id6"/>
-			<label kind="guard" x="-510" y="-34">x&lt;5</label>
-			<label kind="assignment" x="-510" y="-17">x++</label>
-			<nail x="-467" y="-68"/>
+			<label kind="guard" x="-501" y="25">x&lt;5</label>
+			<label kind="assignment" x="-501" y="42">x++</label>
+			<nail x="-467" y="0"/>
 			<nail x="-467" y="68"/>
 		</transition>
 	</template>
